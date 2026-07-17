@@ -2,6 +2,10 @@
 
 App học tiếng Anh giao tiếp công sở (PWA) cho người đi làm bận rộn — vốn từ yếu, nghe nói chưa tốt, cần giao tiếp và trả lời tin nhắn tiếng Anh trong công việc. Học ~20–60 phút/ngày.
 
+**🌐 Dùng ngay: https://hmt1501.github.io/English-learner/**
+
+Mở link trên điện thoại → menu trình duyệt → **"Thêm vào màn hình chính"** để cài như app.
+
 ## Tính năng (MVP)
 
 | Module | Mô tả |
@@ -30,11 +34,11 @@ npm run validate     # kiểm tra nội dung JSON
 npm run build        # build production (tự validate trước)
 ```
 
-## Deploy lên Vercel (miễn phí)
+## Deploy (tự động qua GitHub Pages)
 
-1. Đẩy code lên GitHub.
-2. Vào [vercel.com](https://vercel.com) → **Add New Project** → chọn repo → Deploy (không cần cấu hình gì).
-3. Mở link trên điện thoại → **Thêm vào màn hình chính** để cài như app.
+Mỗi lần `git push` lên nhánh `main`, GitHub Actions ([.github/workflows/deploy.yml](.github/workflows/deploy.yml)) tự chạy test → build static export → deploy lên **https://hmt1501.github.io/English-learner/**. Không cần server, không cần máy cá nhân mở.
+
+Lưu ý kỹ thuật: app build với `NEXT_PUBLIC_BASE_PATH=/English-learner` trên CI vì GitHub Pages phục vụ ở đường dẫn con. Chạy local thì không cần biến này.
 
 ## Thêm nội dung mới
 

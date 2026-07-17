@@ -24,7 +24,7 @@ English-learning PWA for a small group of Vietnamese office workers (pre-interme
 - **SRS** is a pure-function SM-2 variant in `src/lib/srs.ts` (4 ratings: Lại/Khó/Tốt/Dễ, learning steps 1m→10m, graduate 1d/easy 4d). Card states persist in IndexedDB via `src/lib/storage.ts` (idb-keyval).
 - **Daily plan** is composed by pure `composeSession()` in `src/lib/session.ts` (modes: quick ~20', full ~40', deep ~60'), rendered on the home page. Completion keys (`review`, `listening:<id>`, ...) live in the zustand store `src/stores/progress.ts` (persisted as `tacs-progress` in localStorage) along with streak and settings.
 - **PWA**: hand-written vanilla service worker `public/sw.js` (NOT Serwist — Next 16 Turbopack builds don't run webpack plugins). Network-first pages, cache-first for `/audio/` and `/_next/static/`. Registered by `src/components/ui/RegisterSW.tsx` in production only. Bump `VERSION` in sw.js when changing caching behavior.
-- All pages are static/client-side; there is **no server code**. The planned Phase-2 AI feedback route (`src/app/api/feedback/route.ts`) would be the only exception.
+- All pages are static/client-side; there is **no server code**. The app builds with `output: "export"` and deploys to **GitHub Pages** (https://hmt1501.github.io/English-learner/) via `.github/workflows/deploy.yml` on every push to `main`. CI sets `NEXT_PUBLIC_BASE_PATH=/English-learner` (Pages serves at a subpath) — hardcoded absolute URLs must be prefixed with `process.env.NEXT_PUBLIC_BASE_PATH ?? ""` (see `speech.ts`, `layout.tsx`); `sw.js` derives its base from the SW registration scope. The planned Phase-2 AI feedback route would require moving off static export (e.g. to Vercel) since API routes don't work with `output: "export"`.
 
 ## Conventions
 
