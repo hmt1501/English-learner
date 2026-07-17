@@ -1,0 +1,22 @@
+{
+  "id": "meetings-01",
+  "topic": "meetings",
+  "titleVi": "Dời cuộc họp",
+  "level": 1,
+  "lines": [
+    { "speaker": "A", "text": "Hi Lan, do you have a minute?", "textVi": "Chào Lan, bạn rảnh một phút không?", "audio": "meetings-01-l01" },
+    { "speaker": "B", "text": "Sure, what's up?", "textVi": "Được chứ, có chuyện gì vậy?", "audio": "meetings-01-l02" },
+    { "speaker": "A", "text": "It's about tomorrow's meeting. Can we push it back to Thursday?", "textVi": "Về cuộc họp ngày mai ấy. Chúng ta dời sang thứ Năm được không?", "audio": "meetings-01-l03" },
+    { "speaker": "B", "text": "Thursday? Let me check my calendar.", "textVi": "Thứ Năm à? Để tôi xem lịch đã.", "audio": "meetings-01-l04" },
+    { "speaker": "A", "text": "The client asked to join, and they're only free on Thursday.", "textVi": "Khách hàng muốn tham gia, mà họ chỉ rảnh thứ Năm.", "audio": "meetings-01-l05" },
+    { "speaker": "B", "text": "I see. Thursday morning works for me. Is ten o'clock OK?", "textVi": "Ra vậy. Sáng thứ Năm tôi rảnh. Mười giờ được không?", "audio": "meetings-01-l06" },
+    { "speaker": "A", "text": "Ten is perfect. I'll send a new calendar invite.", "textVi": "Mười giờ là hoàn hảo. Tôi sẽ gửi lời mời lịch mới.", "audio": "meetings-01-l07" },
+    { "speaker": "B", "text": "Great. Could you also share the agenda before the meeting?", "textVi": "Tuyệt. Bạn gửi luôn nội dung họp trước buổi họp nhé?", "audio": "meetings-01-l08" },
+    { "speaker": "A", "text": "Will do. Thanks, Lan!", "textVi": "Tôi sẽ gửi. Cảm ơn Lan!", "audio": "meetings-01-l09" }
+  ],
+  "questions": [
+    { "qVi": "Cuộc họp bị dời đến khi nào?", "options": ["Thứ Tư", "Thứ Năm", "Tuần sau"], "answer": 1 },
+    { "qVi": "Vì sao phải dời cuộc họp?", "options": ["Lan bận việc", "Khách hàng chỉ rảnh thứ Năm", "Phòng họp bị chiếm"], "answer": 1 },
+    { "qVi": "Lan yêu cầu điều gì trước cuộc họp?", "options": ["Gửi nội dung họp (agenda)", "Đặt phòng họp", "Mời thêm người"], "answer": 0 }
+  ]
+}

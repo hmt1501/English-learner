@@ -1,0 +1,17 @@
+{
+  "id": "sc-cep-01",
+  "topic": "chat-email-phrases",
+  "titleVi": "Đồng nghiệp hỏi xin file",
+  "contextVi": "Đồng nghiệp nước ngoài nhắn qua Zalo xin file thiết kế. File đang được bạn chỉnh sửa, khoảng 30 phút nữa mới xong.",
+  "taskVi": "Trả lời rằng bạn đang chỉnh sửa và sẽ gửi trong khoảng 30 phút nữa.",
+  "thread": [
+    { "from": "Sarah (Đồng nghiệp)", "text": "Hey! Do you have the final design file? The client wants to see it." }
+  ],
+  "hints": ["I'm still working on it", "give me about 30 minutes", "I'll send it over"],
+  "modelAnswers": [
+    { "style": "neutral", "text": "Hi Sarah! I'm still working on it — just fixing a few small things. Give me about 30 minutes and I'll send it over. Is that OK?" },
+    { "style": "friendly", "text": "Hey Sarah! Almost done — I'm polishing the last details. I'll send it over in about half an hour. Hope that's not too late for the client!" }
+  ],
+  "rubricVi": ["Có nói rõ tình trạng hiện tại (đang làm)?", "Có nêu thời gian cụ thể sẽ gửi?", "Có hỏi lại xem thời gian đó ổn không?"],
+  "srsCards": ["str-002", "cep-005", "str-003"]
+}

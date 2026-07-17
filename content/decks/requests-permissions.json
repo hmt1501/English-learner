@@ -1,0 +1,157 @@
+{
+  "id": "requests-permissions",
+  "topic": "requests-permissions",
+  "titleVi": "Đề nghị & xin phép",
+  "cards": [
+    {
+      "id": "req-001",
+      "chunk": "Could you send me the file by 5 PM?",
+      "meaningVi": "Bạn gửi tôi file trước 5 giờ chiều được không?",
+      "example": "Could you send me the file by 5 PM? I need it for tomorrow.",
+      "exampleVi": "Bạn gửi tôi file trước 5 giờ chiều được không? Mai tôi cần dùng.",
+      "cue": "Nhờ đồng nghiệp gửi file kèm thời hạn",
+      "cloze": "Could you ___ me the file by 5 PM?",
+      "audio": "req-001"
+    },
+    {
+      "id": "req-002",
+      "chunk": "Would you mind checking this?",
+      "meaningVi": "Bạn có phiền kiểm tra cái này giúp không?",
+      "example": "Would you mind checking this before I send it to the client?",
+      "exampleVi": "Bạn có phiền kiểm tra cái này trước khi tôi gửi khách không?",
+      "cue": "Nhờ vả rất lịch sự, trang trọng hơn 'could you'",
+      "cloze": "Would you ___ checking this?",
+      "audio": "req-002"
+    },
+    {
+      "id": "req-003",
+      "chunk": "May I leave early today?",
+      "meaningVi": "Hôm nay tôi về sớm được không ạ?",
+      "example": "May I leave early today? I have a doctor's appointment.",
+      "exampleVi": "Hôm nay tôi về sớm được không ạ? Tôi có hẹn bác sĩ.",
+      "cue": "Xin phép sếp về sớm",
+      "cloze": "May I ___ early today?",
+      "audio": "req-003"
+    },
+    {
+      "id": "req-004",
+      "chunk": "I'd like to take a day off.",
+      "meaningVi": "Tôi muốn xin nghỉ một ngày.",
+      "example": "I'd like to take a day off next Friday, if possible.",
+      "exampleVi": "Tôi muốn xin nghỉ thứ Sáu tuần sau, nếu được ạ.",
+      "cue": "Xin nghỉ phép với sếp",
+      "cloze": "I'd like to take a ___ off.",
+      "audio": "req-004"
+    },
+    {
+      "id": "req-005",
+      "chunk": "Is it OK if I work from home?",
+      "meaningVi": "Tôi làm việc ở nhà có được không?",
+      "example": "Is it OK if I work from home tomorrow? My child is sick.",
+      "exampleVi": "Mai tôi làm việc ở nhà được không ạ? Con tôi bị ốm.",
+      "cue": "Xin phép làm việc từ xa",
+      "cloze": "Is it OK if I work from ___ ?",
+      "audio": "req-005"
+    },
+    {
+      "id": "req-006",
+      "chunk": "Can I borrow you for a second?",
+      "meaningVi": "Cho tôi mượn bạn một chút được không?",
+      "example": "Can I borrow you for a second? I need a quick opinion.",
+      "exampleVi": "Cho tôi mượn bạn một chút được không? Tôi cần hỏi ý nhanh.",
+      "cue": "Kéo đồng nghiệp ra hỏi việc trong chốc lát",
+      "cloze": "Can I ___ you for a second?",
+      "audio": "req-006"
+    },
+    {
+      "id": "req-007",
+      "chunk": "Please double-check the numbers.",
+      "meaningVi": "Vui lòng kiểm tra kỹ lại số liệu.",
+      "example": "Please double-check the numbers before the meeting.",
+      "exampleVi": "Vui lòng kiểm tra kỹ lại số liệu trước cuộc họp.",
+      "cue": "Yêu cầu ai đó kiểm tra lại lần nữa cho chắc",
+      "cloze": "Please ___ the numbers.",
+      "audio": "req-007"
+    },
+    {
+      "id": "req-008",
+      "chunk": "Whenever you have time.",
+      "meaningVi": "Khi nào bạn có thời gian cũng được.",
+      "example": "No rush — whenever you have time.",
+      "exampleVi": "Không gấp đâu — khi nào bạn có thời gian cũng được.",
+      "cue": "Nói rõ rằng việc bạn nhờ không gấp",
+      "cloze": "Whenever you have ___ .",
+      "audio": "req-008"
+    },
+    {
+      "id": "req-009",
+      "chunk": "Could you cover for me?",
+      "meaningVi": "Bạn làm thay tôi được không?",
+      "example": "I'll be away Friday — could you cover for me?",
+      "exampleVi": "Thứ Sáu tôi vắng — bạn làm thay tôi được không?",
+      "cue": "Nhờ đồng nghiệp trực thay khi bạn vắng mặt",
+      "cloze": "Could you ___ for me?",
+      "audio": "req-009"
+    },
+    {
+      "id": "req-010",
+      "chunk": "Of course, no problem.",
+      "meaningVi": "Tất nhiên rồi, không vấn đề gì.",
+      "example": "\"Can you help me move these boxes?\" — \"Of course, no problem.\"",
+      "exampleVi": "\"Giúp tôi chuyển mấy thùng này nhé?\" — \"Tất nhiên, không vấn đề gì.\"",
+      "cue": "Đồng ý vui vẻ khi được nhờ giúp",
+      "cloze": "Of course, no ___ .",
+      "audio": "req-010"
+    },
+    {
+      "id": "req-011",
+      "chunk": "I'm afraid I can't right now.",
+      "meaningVi": "E là bây giờ tôi không thể.",
+      "example": "I'm afraid I can't right now — can it wait until 3?",
+      "exampleVi": "E là giờ tôi chưa làm được — đợi đến 3 giờ được không?",
+      "cue": "Từ chối lịch sự vì đang bận",
+      "cloze": "I'm ___ I can't right now.",
+      "audio": "req-011"
+    },
+    {
+      "id": "req-012",
+      "chunk": "Could I get your approval on this?",
+      "meaningVi": "Tôi xin phê duyệt của bạn cho việc này được không?",
+      "example": "Could I get your approval on this budget before Friday?",
+      "exampleVi": "Tôi xin anh/chị duyệt ngân sách này trước thứ Sáu được không?",
+      "cue": "Xin sếp phê duyệt một đề xuất",
+      "cloze": "Could I get your ___ on this?",
+      "audio": "req-012"
+    },
+    {
+      "id": "req-013",
+      "chunk": "Feel free to reach out anytime.",
+      "meaningVi": "Cứ thoải mái liên hệ tôi bất cứ lúc nào.",
+      "example": "If you need help with the tool, feel free to reach out anytime.",
+      "exampleVi": "Nếu cần hỗ trợ về công cụ, cứ liên hệ tôi bất cứ lúc nào.",
+      "cue": "Đề nghị sẵn sàng hỗ trợ người khác",
+      "cloze": "Feel free to ___ out anytime.",
+      "audio": "req-013"
+    },
+    {
+      "id": "req-014",
+      "chunk": "Could you keep me in the loop?",
+      "meaningVi": "Bạn nhớ cập nhật tình hình cho tôi nhé?",
+      "example": "I can't join the call — could you keep me in the loop?",
+      "exampleVi": "Tôi không tham gia cuộc gọi được — bạn cập nhật cho tôi nhé?",
+      "cue": "Nhờ người khác báo cho bạn biết các diễn biến mới",
+      "cloze": "Could you keep me in the ___ ?",
+      "audio": "req-014"
+    },
+    {
+      "id": "req-015",
+      "chunk": "Take your time.",
+      "meaningVi": "Cứ từ từ, không cần vội.",
+      "example": "\"I'll finish it this afternoon.\" — \"Take your time.\"",
+      "exampleVi": "\"Chiều nay tôi làm xong.\" — \"Cứ từ từ, không cần vội.\"",
+      "cue": "Trấn an người khác rằng họ không cần gấp",
+      "cloze": "Take your ___ .",
+      "audio": "req-015"
+    }
+  ]
+}

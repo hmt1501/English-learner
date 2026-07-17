@@ -1,0 +1,22 @@
+{
+  "id": "problems-01",
+  "topic": "problems-apologies",
+  "titleVi": "Hệ thống bị sập",
+  "level": 2,
+  "lines": [
+    { "speaker": "A", "text": "Huy, we have a problem. The order system is down.", "textVi": "Huy, chúng ta có vấn đề rồi. Hệ thống đơn hàng bị sập.", "audio": "problems-01-l01" },
+    { "speaker": "B", "text": "Since when? Customers are calling already?", "textVi": "Từ khi nào vậy? Khách hàng gọi đến rồi à?", "audio": "problems-01-l02" },
+    { "speaker": "A", "text": "About twenty minutes ago. Two clients have called so far.", "textVi": "Khoảng hai mươi phút trước. Đã có hai khách hàng gọi đến.", "audio": "problems-01-l03" },
+    { "speaker": "B", "text": "OK. The tech team is looking into it. I'll ask for an update now.", "textVi": "OK. Nhóm kỹ thuật đang tìm hiểu. Tôi sẽ hỏi tình hình ngay.", "audio": "problems-01-l04" },
+    { "speaker": "A", "text": "What should I tell the customers?", "textVi": "Tôi nên nói gì với khách hàng đây?", "audio": "problems-01-l05" },
+    { "speaker": "B", "text": "Say we're sorry for the trouble, and everything will be back to normal within an hour.", "textVi": "Nói rằng chúng ta xin lỗi vì sự cố, và mọi thứ sẽ trở lại bình thường trong vòng một tiếng.", "audio": "problems-01-l06" },
+    { "speaker": "A", "text": "Within an hour — are you sure about that?", "textVi": "Trong vòng một tiếng — anh chắc chứ?", "audio": "problems-01-l07" },
+    { "speaker": "B", "text": "That's what the tech team promised. I'll keep you posted.", "textVi": "Nhóm kỹ thuật hứa vậy. Tôi sẽ cập nhật cho bạn liên tục.", "audio": "problems-01-l08" },
+    { "speaker": "A", "text": "Got it. Thanks for the quick response.", "textVi": "Hiểu rồi. Cảm ơn vì phản hồi nhanh.", "audio": "problems-01-l09" }
+  ],
+  "questions": [
+    { "qVi": "Chuyện gì đã xảy ra?", "options": ["Hệ thống đơn hàng bị sập", "Mất điện văn phòng", "Khách hàng hủy hợp đồng"], "answer": 0 },
+    { "qVi": "Bao nhiêu khách hàng đã gọi đến?", "options": ["Một", "Hai", "Năm"], "answer": 1 },
+    { "qVi": "Hệ thống dự kiến hoạt động lại sau bao lâu?", "options": ["20 phút", "1 tiếng", "1 ngày"], "answer": 1 }
+  ]
+}

@@ -1,0 +1,157 @@
+{
+  "id": "status-reporting",
+  "topic": "status-reporting",
+  "titleVi": "Báo cáo tiến độ",
+  "cards": [
+    {
+      "id": "str-001",
+      "chunk": "I've finished the report.",
+      "meaningVi": "Tôi đã hoàn thành báo cáo.",
+      "example": "Good news — I've finished the report and sent it to you.",
+      "exampleVi": "Tin tốt — tôi đã hoàn thành báo cáo và gửi cho bạn rồi.",
+      "cue": "Báo với sếp rằng công việc đã xong",
+      "cloze": "I've ___ the report.",
+      "audio": "str-001"
+    },
+    {
+      "id": "str-002",
+      "chunk": "I'm still working on it.",
+      "meaningVi": "Tôi vẫn đang làm việc đó.",
+      "example": "The design isn't ready yet — I'm still working on it.",
+      "exampleVi": "Thiết kế chưa xong — tôi vẫn đang làm.",
+      "cue": "Sếp hỏi tiến độ và việc chưa hoàn thành",
+      "cloze": "I'm still ___ on it.",
+      "audio": "str-002"
+    },
+    {
+      "id": "str-003",
+      "chunk": "It's almost done.",
+      "meaningVi": "Sắp xong rồi.",
+      "example": "Don't worry, it's almost done — just one more section.",
+      "exampleVi": "Đừng lo, sắp xong rồi — chỉ còn một phần nữa.",
+      "cue": "Công việc đã hoàn thành khoảng 90%",
+      "cloze": "It's ___ done.",
+      "audio": "str-003"
+    },
+    {
+      "id": "str-004",
+      "chunk": "We're on track.",
+      "meaningVi": "Chúng ta đang đúng tiến độ.",
+      "example": "We're on track to finish by the end of the month.",
+      "exampleVi": "Chúng ta đang đúng tiến độ để hoàn thành cuối tháng.",
+      "cue": "Báo cáo rằng dự án đang đi đúng kế hoạch",
+      "cloze": "We're on ___ .",
+      "audio": "str-004"
+    },
+    {
+      "id": "str-005",
+      "chunk": "We're behind schedule.",
+      "meaningVi": "Chúng ta đang chậm tiến độ.",
+      "example": "I have to be honest — we're behind schedule by two days.",
+      "exampleVi": "Tôi phải nói thật — chúng ta đang chậm tiến độ hai ngày.",
+      "cue": "Báo cáo rằng dự án đang trễ so với kế hoạch",
+      "cloze": "We're ___ schedule.",
+      "audio": "str-005"
+    },
+    {
+      "id": "str-006",
+      "chunk": "I'll send it by end of day.",
+      "meaningVi": "Tôi sẽ gửi trước cuối ngày hôm nay.",
+      "example": "The file needs one more check. I'll send it by end of day.",
+      "exampleVi": "File cần kiểm tra thêm một lần. Tôi sẽ gửi trước cuối ngày.",
+      "cue": "Hứa gửi tài liệu trong hôm nay",
+      "cloze": "I'll send it by ___ of day.",
+      "audio": "str-006"
+    },
+    {
+      "id": "str-007",
+      "chunk": "Here's a quick update.",
+      "meaningVi": "Đây là cập nhật nhanh.",
+      "example": "Here's a quick update: testing is done, launch is tomorrow.",
+      "exampleVi": "Cập nhật nhanh: kiểm thử xong rồi, mai ra mắt.",
+      "cue": "Mở đầu tin nhắn báo cáo tình hình cho nhóm",
+      "cloze": "Here's a quick ___ .",
+      "audio": "str-007"
+    },
+    {
+      "id": "str-008",
+      "chunk": "We ran into a problem.",
+      "meaningVi": "Chúng tôi gặp phải một vấn đề.",
+      "example": "We ran into a problem with the server this morning.",
+      "exampleVi": "Sáng nay chúng tôi gặp phải một vấn đề với máy chủ.",
+      "cue": "Báo cáo có sự cố phát sinh trong công việc",
+      "cloze": "We ___ into a problem.",
+      "audio": "str-008"
+    },
+    {
+      "id": "str-009",
+      "chunk": "It's taking longer than expected.",
+      "meaningVi": "Việc này mất nhiều thời gian hơn dự kiến.",
+      "example": "Sorry, it's taking longer than expected — the data is messy.",
+      "exampleVi": "Xin lỗi, việc này lâu hơn dự kiến — dữ liệu khá lộn xộn.",
+      "cue": "Giải thích vì sao công việc chưa xong đúng hạn",
+      "cloze": "It's taking ___ than expected.",
+      "audio": "str-009"
+    },
+    {
+      "id": "str-010",
+      "chunk": "I need two more days.",
+      "meaningVi": "Tôi cần thêm hai ngày nữa.",
+      "example": "To do it properly, I need two more days.",
+      "exampleVi": "Để làm cho tốt, tôi cần thêm hai ngày nữa.",
+      "cue": "Xin thêm thời gian để hoàn thành công việc",
+      "cloze": "I need two ___ days.",
+      "audio": "str-010"
+    },
+    {
+      "id": "str-011",
+      "chunk": "Everything is going well.",
+      "meaningVi": "Mọi việc đang diễn ra tốt đẹp.",
+      "example": "Everything is going well — no issues so far.",
+      "exampleVi": "Mọi việc đang tốt — chưa có vấn đề gì.",
+      "cue": "Trả lời khi sếp hỏi tình hình chung",
+      "cloze": "Everything is going ___ .",
+      "audio": "str-011"
+    },
+    {
+      "id": "str-012",
+      "chunk": "I've completed about half of it.",
+      "meaningVi": "Tôi đã hoàn thành khoảng một nửa.",
+      "example": "I've completed about half of it — the rest by Thursday.",
+      "exampleVi": "Tôi xong khoảng một nửa rồi — phần còn lại trước thứ Năm.",
+      "cue": "Báo cáo tiến độ khi việc xong khoảng 50%",
+      "cloze": "I've completed about ___ of it.",
+      "audio": "str-012"
+    },
+    {
+      "id": "str-013",
+      "chunk": "The deadline is tight.",
+      "meaningVi": "Deadline khá gấp.",
+      "example": "The deadline is tight, but I think we can make it.",
+      "exampleVi": "Deadline khá gấp, nhưng tôi nghĩ chúng ta kịp.",
+      "cue": "Nhận xét rằng thời hạn công việc rất sát",
+      "cloze": "The deadline is ___ .",
+      "audio": "str-013"
+    },
+    {
+      "id": "str-014",
+      "chunk": "I'll prioritize this task.",
+      "meaningVi": "Tôi sẽ ưu tiên việc này.",
+      "example": "Understood — I'll prioritize this task and pause the others.",
+      "exampleVi": "Hiểu rồi — tôi sẽ ưu tiên việc này và tạm dừng việc khác.",
+      "cue": "Sếp nói việc này gấp và bạn đồng ý làm trước",
+      "cloze": "I'll ___ this task.",
+      "audio": "str-014"
+    },
+    {
+      "id": "str-015",
+      "chunk": "It's ready for review.",
+      "meaningVi": "Đã sẵn sàng để kiểm tra.",
+      "example": "The document is ready for review — please take a look.",
+      "exampleVi": "Tài liệu đã sẵn sàng để kiểm tra — bạn xem qua nhé.",
+      "cue": "Bạn xong việc và muốn người khác xem lại",
+      "cloze": "It's ready for ___ .",
+      "audio": "str-015"
+    }
+  ]
+}

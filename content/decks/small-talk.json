@@ -1,0 +1,157 @@
+{
+  "id": "small-talk",
+  "topic": "small-talk",
+  "titleVi": "Xã giao công sở",
+  "cards": [
+    {
+      "id": "smt-001",
+      "chunk": "How was your weekend?",
+      "meaningVi": "Cuối tuần của bạn thế nào?",
+      "example": "Morning! How was your weekend?",
+      "exampleVi": "Chào buổi sáng! Cuối tuần của bạn thế nào?",
+      "cue": "Bắt chuyện với đồng nghiệp sáng thứ Hai",
+      "cloze": "How was your ___ ?",
+      "audio": "smt-001"
+    },
+    {
+      "id": "smt-002",
+      "chunk": "It was pretty relaxing.",
+      "meaningVi": "Khá là thư giãn.",
+      "example": "It was pretty relaxing — I just stayed home with my family.",
+      "exampleVi": "Khá thư giãn — tôi chỉ ở nhà với gia đình.",
+      "cue": "Trả lời khi được hỏi về kỳ nghỉ cuối tuần",
+      "cloze": "It was pretty ___ .",
+      "audio": "smt-002"
+    },
+    {
+      "id": "smt-003",
+      "chunk": "How's it going?",
+      "meaningVi": "Dạo này thế nào?",
+      "example": "Hey Minh, how's it going?",
+      "exampleVi": "Này Minh, dạo này thế nào?",
+      "cue": "Chào hỏi thân mật khi gặp đồng nghiệp",
+      "cloze": "How's it ___ ?",
+      "audio": "smt-003"
+    },
+    {
+      "id": "smt-004",
+      "chunk": "Busy as usual.",
+      "meaningVi": "Bận như mọi khi.",
+      "example": "\"How's work?\" — \"Busy as usual, but it's fine.\"",
+      "exampleVi": "\"Công việc sao rồi?\" — \"Bận như mọi khi, nhưng ổn.\"",
+      "cue": "Trả lời nhẹ nhàng khi được hỏi công việc thế nào",
+      "cloze": "Busy as ___ .",
+      "audio": "smt-004"
+    },
+    {
+      "id": "smt-005",
+      "chunk": "Do you want to grab lunch?",
+      "meaningVi": "Bạn muốn đi ăn trưa không?",
+      "example": "It's almost noon — do you want to grab lunch together?",
+      "exampleVi": "Gần trưa rồi — bạn muốn đi ăn trưa cùng không?",
+      "cue": "Rủ đồng nghiệp đi ăn trưa",
+      "cloze": "Do you want to ___ lunch?",
+      "audio": "smt-005"
+    },
+    {
+      "id": "smt-006",
+      "chunk": "The weather is nice today.",
+      "meaningVi": "Hôm nay thời tiết đẹp nhỉ.",
+      "example": "The weather is nice today — perfect for a coffee outside.",
+      "exampleVi": "Hôm nay trời đẹp — hợp để ra ngoài uống cà phê.",
+      "cue": "Mở đầu câu chuyện xã giao bằng thời tiết",
+      "cloze": "The ___ is nice today.",
+      "audio": "smt-006"
+    },
+    {
+      "id": "smt-007",
+      "chunk": "Did you watch the game last night?",
+      "meaningVi": "Tối qua bạn có xem trận đấu không?",
+      "example": "Did you watch the game last night? What a match!",
+      "exampleVi": "Tối qua bạn có xem trận đấu không? Trận hay ghê!",
+      "cue": "Bắt chuyện về thể thao với đồng nghiệp",
+      "cloze": "Did you ___ the game last night?",
+      "audio": "smt-007"
+    },
+    {
+      "id": "smt-008",
+      "chunk": "Long time no see!",
+      "meaningVi": "Lâu rồi không gặp!",
+      "example": "Hey, long time no see! How have you been?",
+      "exampleVi": "Ơ, lâu rồi không gặp! Dạo này bạn sao rồi?",
+      "cue": "Gặp lại đồng nghiệp sau một thời gian dài",
+      "cloze": "Long time no ___ !",
+      "audio": "smt-008"
+    },
+    {
+      "id": "smt-009",
+      "chunk": "How have you been?",
+      "meaningVi": "Dạo này bạn thế nào?",
+      "example": "Nice to see you again! How have you been?",
+      "exampleVi": "Rất vui gặp lại bạn! Dạo này bạn thế nào?",
+      "cue": "Hỏi thăm người lâu ngày mới gặp",
+      "cloze": "How have you ___ ?",
+      "audio": "smt-009"
+    },
+    {
+      "id": "smt-010",
+      "chunk": "Any plans for the holiday?",
+      "meaningVi": "Có kế hoạch gì cho kỳ nghỉ chưa?",
+      "example": "Tet is coming — any plans for the holiday?",
+      "exampleVi": "Sắp Tết rồi — có kế hoạch gì cho kỳ nghỉ chưa?",
+      "cue": "Hỏi về dự định nghỉ lễ của đồng nghiệp",
+      "cloze": "Any ___ for the holiday?",
+      "audio": "smt-010"
+    },
+    {
+      "id": "smt-011",
+      "chunk": "That sounds fun!",
+      "meaningVi": "Nghe vui đấy!",
+      "example": "\"We're going camping this weekend.\" — \"That sounds fun!\"",
+      "exampleVi": "\"Cuối tuần này bọn tôi đi cắm trại.\" — \"Nghe vui đấy!\"",
+      "cue": "Phản hồi tích cực khi nghe kế hoạch của người khác",
+      "cloze": "That ___ fun!",
+      "audio": "smt-011"
+    },
+    {
+      "id": "smt-012",
+      "chunk": "Nice to meet you.",
+      "meaningVi": "Rất vui được gặp bạn.",
+      "example": "I'm Huy from the sales team. Nice to meet you.",
+      "exampleVi": "Tôi là Huy bên nhóm kinh doanh. Rất vui được gặp bạn.",
+      "cue": "Chào người mới gặp lần đầu trong công ty",
+      "cloze": "Nice to ___ you.",
+      "audio": "smt-012"
+    },
+    {
+      "id": "smt-013",
+      "chunk": "Which team are you on?",
+      "meaningVi": "Bạn ở nhóm nào?",
+      "example": "I don't think we've met — which team are you on?",
+      "exampleVi": "Hình như mình chưa gặp nhau — bạn ở nhóm nào?",
+      "cue": "Làm quen với đồng nghiệp mới ở công ty",
+      "cloze": "Which ___ are you on?",
+      "audio": "smt-013"
+    },
+    {
+      "id": "smt-014",
+      "chunk": "I'd better get back to work.",
+      "meaningVi": "Tôi phải quay lại làm việc thôi.",
+      "example": "Nice chatting with you — I'd better get back to work.",
+      "exampleVi": "Nói chuyện vui quá — nhưng tôi phải quay lại làm việc thôi.",
+      "cue": "Kết thúc cuộc trò chuyện xã giao một cách lịch sự",
+      "cloze": "I'd better get ___ to work.",
+      "audio": "smt-014"
+    },
+    {
+      "id": "smt-015",
+      "chunk": "Have a good one!",
+      "meaningVi": "Chúc một ngày tốt lành!",
+      "example": "See you tomorrow — have a good one!",
+      "exampleVi": "Mai gặp lại — chúc một ngày tốt lành!",
+      "cue": "Chào tạm biệt thân thiện cuối ngày",
+      "cloze": "Have a ___ one!",
+      "audio": "smt-015"
+    }
+  ]
+}

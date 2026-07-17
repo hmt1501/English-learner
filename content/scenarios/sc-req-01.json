@@ -1,0 +1,17 @@
+{
+  "id": "sc-req-01",
+  "topic": "requests-permissions",
+  "titleVi": "Xin nghỉ phép một ngày",
+  "contextVi": "Bạn cần nghỉ thứ Sáu tuần sau để lo việc gia đình. Bạn nhắn tin xin phép sếp. Công việc tuần đó không có deadline gấp.",
+  "taskVi": "Xin nghỉ một ngày lịch sự: nêu ngày cụ thể, lý do ngắn gọn, và cam kết bàn giao/xử lý công việc trước khi nghỉ.",
+  "thread": [
+    { "from": "Ms. Kate (Sếp)", "text": "Hi, what's up?" }
+  ],
+  "hints": ["I'd like to take a day off", "next Friday", "I'll finish my tasks before that"],
+  "modelAnswers": [
+    { "style": "formal", "text": "Hi Kate, I'd like to take a day off next Friday (July 24) for a family matter. I'll finish all my tasks before Thursday evening, and Huy can cover for me if anything urgent comes up. Would that be OK?" },
+    { "style": "neutral", "text": "Hi Kate! Could I take next Friday off? I have a family thing to take care of. I'll make sure everything is done by Thursday, and I'll be reachable on Zalo if needed." }
+  ],
+  "rubricVi": ["Có nêu ngày nghỉ cụ thể?", "Có lý do ngắn gọn?", "Có phương án xử lý công việc?", "Có câu hỏi xin phép cuối tin?"],
+  "srsCards": ["req-004", "req-009", "str-014"]
+}

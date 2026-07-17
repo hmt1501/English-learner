@@ -1,0 +1,24 @@
+{
+  "id": "scheduling-01",
+  "topic": "scheduling",
+  "titleVi": "Hẹn lịch với khách hàng",
+  "level": 2,
+  "lines": [
+    { "speaker": "A", "text": "Hello, this is Trang from ABC Company. Am I speaking with Mr. Davis?", "textVi": "Xin chào, tôi là Trang từ công ty ABC. Có phải anh Davis không ạ?", "audio": "scheduling-01-l01" },
+    { "speaker": "B", "text": "Yes, speaking. How can I help you?", "textVi": "Vâng, tôi đây. Tôi có thể giúp gì?", "audio": "scheduling-01-l02" },
+    { "speaker": "A", "text": "I'm calling about the product demo. Are you free on Thursday afternoon?", "textVi": "Tôi gọi về buổi demo sản phẩm. Chiều thứ Năm anh có rảnh không?", "audio": "scheduling-01-l03" },
+    { "speaker": "B", "text": "Thursday afternoon... I have another meeting at that time, I'm afraid.", "textVi": "Chiều thứ Năm à... E là giờ đó tôi có cuộc họp khác rồi.", "audio": "scheduling-01-l04" },
+    { "speaker": "A", "text": "No problem. What time works for you?", "textVi": "Không sao ạ. Vậy mấy giờ thì tiện cho anh?", "audio": "scheduling-01-l05" },
+    { "speaker": "B", "text": "Friday morning would be better. Does ten o'clock suit you?", "textVi": "Sáng thứ Sáu thì tốt hơn. Mười giờ có tiện cho cô không?", "audio": "scheduling-01-l06" },
+    { "speaker": "A", "text": "Friday at ten is perfect. It will take about forty-five minutes.", "textVi": "Thứ Sáu mười giờ là hoàn hảo ạ. Buổi demo sẽ mất khoảng bốn mươi lăm phút.", "audio": "scheduling-01-l07" },
+    { "speaker": "B", "text": "Sounds good. Will this be online or at our office?", "textVi": "Nghe ổn đấy. Buổi này online hay tại văn phòng chúng tôi?", "audio": "scheduling-01-l08" },
+    { "speaker": "A", "text": "Online. I'll send you a calendar invite with the meeting link today.", "textVi": "Online ạ. Hôm nay tôi sẽ gửi anh lời mời kèm đường dẫn cuộc họp.", "audio": "scheduling-01-l09" },
+    { "speaker": "B", "text": "Great. See you on Friday then.", "textVi": "Tuyệt. Vậy hẹn gặp cô thứ Sáu.", "audio": "scheduling-01-l10" }
+  ],
+  "questions": [
+    { "qVi": "Trang gọi điện để làm gì?", "options": ["Hẹn lịch demo sản phẩm", "Đòi thanh toán", "Xin lỗi khách hàng"], "answer": 0 },
+    { "qVi": "Vì sao anh Davis không họp được chiều thứ Năm?", "options": ["Anh ấy đi công tác", "Anh ấy có cuộc họp khác", "Anh ấy nghỉ phép"], "answer": 1 },
+    { "qVi": "Buổi demo cuối cùng được hẹn vào lúc nào?", "options": ["Thứ Năm 2 giờ chiều", "Thứ Sáu 10 giờ sáng", "Thứ Hai tuần sau"], "answer": 1 },
+    { "qVi": "Buổi demo sẽ diễn ra ở đâu?", "options": ["Online", "Văn phòng khách", "Quán cà phê"], "answer": 0 }
+  ]
+}

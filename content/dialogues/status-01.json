@@ -1,0 +1,21 @@
+{
+  "id": "status-01",
+  "topic": "status-reporting",
+  "titleVi": "Sếp hỏi tiến độ",
+  "level": 1,
+  "lines": [
+    { "speaker": "A", "text": "Morning, Huy. How's the report going?", "textVi": "Chào buổi sáng, Huy. Báo cáo đến đâu rồi?", "audio": "status-01-l01" },
+    { "speaker": "B", "text": "Morning! It's almost done. I've completed about eighty percent.", "textVi": "Chào sếp! Sắp xong rồi ạ. Tôi đã hoàn thành khoảng tám mươi phần trăm.", "audio": "status-01-l02" },
+    { "speaker": "A", "text": "Good. Can you send it by end of day?", "textVi": "Tốt. Cậu gửi trước cuối ngày được không?", "audio": "status-01-l03" },
+    { "speaker": "B", "text": "Honestly, it's taking longer than expected. The sales data is messy.", "textVi": "Thật ra việc này lâu hơn dự kiến ạ. Dữ liệu bán hàng khá lộn xộn.", "audio": "status-01-l04" },
+    { "speaker": "A", "text": "How much more time do you need?", "textVi": "Cậu cần thêm bao nhiêu thời gian?", "audio": "status-01-l05" },
+    { "speaker": "B", "text": "I need one more day. I can send it tomorrow morning.", "textVi": "Tôi cần thêm một ngày. Sáng mai tôi có thể gửi ạ.", "audio": "status-01-l06" },
+    { "speaker": "A", "text": "OK, tomorrow morning then. But please prioritize this task.", "textVi": "Được, vậy sáng mai. Nhưng hãy ưu tiên việc này nhé.", "audio": "status-01-l07" },
+    { "speaker": "B", "text": "Understood. I'll keep you posted if anything changes.", "textVi": "Tôi hiểu rồi ạ. Có gì thay đổi tôi sẽ báo ngay.", "audio": "status-01-l08" }
+  ],
+  "questions": [
+    { "qVi": "Huy đã hoàn thành bao nhiêu phần trăm báo cáo?", "options": ["50%", "80%", "100%"], "answer": 1 },
+    { "qVi": "Vì sao báo cáo bị chậm?", "options": ["Huy bị ốm", "Dữ liệu bán hàng lộn xộn", "Máy tính hỏng"], "answer": 1 },
+    { "qVi": "Khi nào Huy sẽ gửi báo cáo?", "options": ["Cuối ngày hôm nay", "Sáng mai", "Tuần sau"], "answer": 1 }
+  ]
+}

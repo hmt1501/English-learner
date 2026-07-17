@@ -1,0 +1,17 @@
+{
+  "id": "sc-help-01",
+  "topic": "asking-for-help",
+  "titleVi": "Không hiểu yêu cầu trong tin nhắn",
+  "contextVi": "Đồng nghiệp nước ngoài nhắn một yêu cầu nhưng bạn không chắc \"the latest version\" là bản nào — bản v2 hôm qua hay bản v3 bạn vừa sửa sáng nay.",
+  "taskVi": "Hỏi lại để làm rõ, đưa ra 2 lựa chọn cụ thể để người kia dễ trả lời.",
+  "thread": [
+    { "from": "Tom (Đồng nghiệp)", "text": "Can you upload the latest version to the shared folder? Need it before the call." }
+  ],
+  "hints": ["Just to make sure", "Do you mean... or...?", "I'll upload it right away"],
+  "modelAnswers": [
+    { "style": "neutral", "text": "Sure! Just to make sure — do you mean v2 from yesterday, or v3 that I updated this morning? I'll upload it right away once you confirm." },
+    { "style": "friendly", "text": "On it! Quick question: by \"latest version\", do you mean yesterday's v2 or this morning's v3? Let me know and I'll upload it immediately." }
+  ],
+  "rubricVi": ["Có xác nhận sẽ làm?", "Có hỏi lại rõ ràng với 2 lựa chọn cụ thể?", "Có hứa hành động ngay sau khi được xác nhận?"],
+  "srsCards": ["afh-006", "afh-005", "cep-008"]
+}

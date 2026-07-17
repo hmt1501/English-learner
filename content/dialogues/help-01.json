@@ -1,0 +1,21 @@
+{
+  "id": "help-01",
+  "topic": "asking-for-help",
+  "titleVi": "Nhờ hướng dẫn dùng phần mềm",
+  "level": 1,
+  "lines": [
+    { "speaker": "A", "text": "Hey Anna, sorry to bother you. I have a quick question.", "textVi": "Này Anna, xin lỗi làm phiền. Tôi có câu hỏi nhanh.", "audio": "help-01-l01" },
+    { "speaker": "B", "text": "No problem. What is it?", "textVi": "Không sao. Gì vậy?", "audio": "help-01-l02" },
+    { "speaker": "A", "text": "How do I export this report to Excel? I can't find the button.", "textVi": "Làm sao để xuất báo cáo này ra Excel? Tôi không tìm thấy nút bấm.", "audio": "help-01-l03" },
+    { "speaker": "B", "text": "Click the menu on the top right, then choose \"Download\".", "textVi": "Bấm vào menu ở góc trên bên phải, rồi chọn \"Download\".", "audio": "help-01-l04" },
+    { "speaker": "A", "text": "Sorry, I didn't catch that. Could you say it again?", "textVi": "Xin lỗi, tôi chưa nghe kịp. Bạn nói lại được không?", "audio": "help-01-l05" },
+    { "speaker": "B", "text": "Sure. Top right corner, click the three dots, then \"Download\".", "textVi": "Được. Góc trên bên phải, bấm vào ba dấu chấm, rồi \"Download\".", "audio": "help-01-l06" },
+    { "speaker": "A", "text": "Got it! It's downloading now. Thanks a lot for your help.", "textVi": "Hiểu rồi! Đang tải xuống rồi. Cảm ơn bạn nhiều vì đã giúp.", "audio": "help-01-l07" },
+    { "speaker": "B", "text": "Anytime. Feel free to reach out if you get stuck again.", "textVi": "Lúc nào cũng được. Cứ liên hệ nếu bạn lại bị kẹt nhé.", "audio": "help-01-l08" }
+  ],
+  "questions": [
+    { "qVi": "Người hỏi muốn làm gì?", "options": ["Xuất báo cáo ra Excel", "Cài phần mềm mới", "Sửa lỗi máy tính"], "answer": 0 },
+    { "qVi": "Nút cần bấm nằm ở đâu?", "options": ["Góc dưới bên trái", "Góc trên bên phải", "Ở giữa màn hình"], "answer": 1 },
+    { "qVi": "Vì sao người hỏi phải hỏi lại?", "options": ["Không nghe kịp", "Máy bị treo", "Không tin Anna"], "answer": 0 }
+  ]
+}

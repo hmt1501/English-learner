@@ -1,0 +1,22 @@
+{
+  "id": "smalltalk-01",
+  "topic": "small-talk",
+  "titleVi": "Sáng thứ Hai ở văn phòng",
+  "level": 1,
+  "lines": [
+    { "speaker": "A", "text": "Morning, Minh! How was your weekend?", "textVi": "Chào buổi sáng, Minh! Cuối tuần thế nào?", "audio": "smalltalk-01-l01" },
+    { "speaker": "B", "text": "Morning! It was pretty relaxing. I took my kids to the park.", "textVi": "Chào buổi sáng! Khá thư giãn. Tôi đưa bọn trẻ đi công viên.", "audio": "smalltalk-01-l02" },
+    { "speaker": "A", "text": "That sounds fun! The weather was perfect for it.", "textVi": "Nghe vui đấy! Thời tiết hôm đó đúng là hợp.", "audio": "smalltalk-01-l03" },
+    { "speaker": "B", "text": "It really was. How about you? Any plans?", "textVi": "Đúng vậy thật. Còn bạn thì sao? Có kế hoạch gì không?", "audio": "smalltalk-01-l04" },
+    { "speaker": "A", "text": "Not much. I just watched the football game on Saturday night.", "textVi": "Không nhiều lắm. Tối thứ Bảy tôi chỉ xem trận bóng đá.", "audio": "smalltalk-01-l05" },
+    { "speaker": "B", "text": "Oh, did you? What a match! I couldn't believe the last goal.", "textVi": "Ồ, thế à? Trận hay ghê! Tôi không thể tin nổi bàn thắng cuối.", "audio": "smalltalk-01-l06" },
+    { "speaker": "A", "text": "Me neither! Anyway, I'd better get back to work. Busy day today.", "textVi": "Tôi cũng vậy! Thôi, tôi phải quay lại làm việc đây. Hôm nay bận lắm.", "audio": "smalltalk-01-l07" },
+    { "speaker": "B", "text": "Same here. Do you want to grab lunch later?", "textVi": "Tôi cũng thế. Trưa nay đi ăn cùng không?", "audio": "smalltalk-01-l08" },
+    { "speaker": "A", "text": "Sure, let's do that. See you at noon!", "textVi": "Được, vậy nhé. Hẹn gặp lúc mười hai giờ!", "audio": "smalltalk-01-l09" }
+  ],
+  "questions": [
+    { "qVi": "Minh đã làm gì vào cuối tuần?", "options": ["Xem bóng đá", "Đưa con đi công viên", "Đi làm thêm"], "answer": 1 },
+    { "qVi": "Người kia đã làm gì tối thứ Bảy?", "options": ["Xem trận bóng đá", "Đi công viên", "Nấu ăn"], "answer": 0 },
+    { "qVi": "Hai người hẹn nhau làm gì?", "options": ["Họp lúc 2 giờ", "Ăn trưa cùng nhau", "Đi cà phê sau giờ làm"], "answer": 1 }
+  ]
+}

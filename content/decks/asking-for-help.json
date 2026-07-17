@@ -1,0 +1,157 @@
+{
+  "id": "asking-for-help",
+  "topic": "asking-for-help",
+  "titleVi": "Nhờ giúp đỡ & hỏi lại",
+  "cards": [
+    {
+      "id": "afh-001",
+      "chunk": "Could you help me with this?",
+      "meaningVi": "Bạn giúp tôi việc này được không?",
+      "example": "I'm stuck on this formula. Could you help me with this?",
+      "exampleVi": "Tôi bị kẹt ở công thức này. Bạn giúp tôi được không?",
+      "cue": "Bạn gặp khó khăn và cần đồng nghiệp hỗ trợ",
+      "cloze": "Could you ___ me with this?",
+      "audio": "afh-001"
+    },
+    {
+      "id": "afh-002",
+      "chunk": "Sorry, I didn't catch that.",
+      "meaningVi": "Xin lỗi, tôi chưa nghe kịp.",
+      "example": "Sorry, I didn't catch that. Could you say it again?",
+      "exampleVi": "Xin lỗi, tôi chưa nghe kịp. Bạn nói lại được không?",
+      "cue": "Người kia nói nhanh quá và bạn không nghe kịp",
+      "cloze": "Sorry, I didn't ___ that.",
+      "audio": "afh-002"
+    },
+    {
+      "id": "afh-003",
+      "chunk": "Could you speak more slowly?",
+      "meaningVi": "Bạn nói chậm hơn được không?",
+      "example": "My English isn't great yet — could you speak more slowly?",
+      "exampleVi": "Tiếng Anh tôi chưa tốt lắm — bạn nói chậm hơn được không?",
+      "cue": "Bạn muốn người nước ngoài nói chậm lại",
+      "cloze": "Could you speak more ___ ?",
+      "audio": "afh-003"
+    },
+    {
+      "id": "afh-004",
+      "chunk": "What does that mean?",
+      "meaningVi": "Cái đó nghĩa là gì?",
+      "example": "You mentioned \"KPI review\" — what does that mean exactly?",
+      "exampleVi": "Bạn nhắc đến \"KPI review\" — chính xác nghĩa là gì vậy?",
+      "cue": "Bạn gặp một từ hoặc cụm từ không hiểu",
+      "cloze": "What does that ___ ?",
+      "audio": "afh-004"
+    },
+    {
+      "id": "afh-005",
+      "chunk": "Do you mean...?",
+      "meaningVi": "Ý bạn là...?",
+      "example": "Do you mean we should delay the launch?",
+      "exampleVi": "Ý bạn là chúng ta nên hoãn ra mắt à?",
+      "cue": "Kiểm tra lại xem bạn hiểu đúng ý người kia không",
+      "cloze": "Do you ___ ...?",
+      "audio": "afh-005"
+    },
+    {
+      "id": "afh-006",
+      "chunk": "Let me make sure I understand.",
+      "meaningVi": "Để tôi chắc là mình hiểu đúng.",
+      "example": "Let me make sure I understand — you need this by Monday?",
+      "exampleVi": "Để tôi chắc là mình hiểu đúng — bạn cần cái này trước thứ Hai?",
+      "cue": "Tóm tắt lại yêu cầu để xác nhận trước khi làm",
+      "cloze": "Let me make ___ I understand.",
+      "audio": "afh-006"
+    },
+    {
+      "id": "afh-007",
+      "chunk": "Can you show me how to do it?",
+      "meaningVi": "Bạn chỉ tôi cách làm được không?",
+      "example": "I've never used this tool. Can you show me how to do it?",
+      "exampleVi": "Tôi chưa dùng công cụ này bao giờ. Bạn chỉ tôi cách làm được không?",
+      "cue": "Bạn muốn được hướng dẫn trực tiếp cách làm",
+      "cloze": "Can you ___ me how to do it?",
+      "audio": "afh-007"
+    },
+    {
+      "id": "afh-008",
+      "chunk": "I'm not sure I follow.",
+      "meaningVi": "Tôi không chắc là tôi hiểu kịp.",
+      "example": "I'm not sure I follow — can you give an example?",
+      "exampleVi": "Tôi không chắc mình hiểu kịp — bạn cho ví dụ được không?",
+      "cue": "Người kia giải thích nhưng bạn bị rối",
+      "cloze": "I'm not sure I ___ .",
+      "audio": "afh-008"
+    },
+    {
+      "id": "afh-009",
+      "chunk": "Who should I ask about this?",
+      "meaningVi": "Tôi nên hỏi ai về việc này?",
+      "example": "I have a question about my payslip. Who should I ask about this?",
+      "exampleVi": "Tôi có câu hỏi về bảng lương. Tôi nên hỏi ai về việc này?",
+      "cue": "Bạn không biết ai phụ trách vấn đề bạn cần hỏi",
+      "cloze": "Who should I ___ about this?",
+      "audio": "afh-009"
+    },
+    {
+      "id": "afh-010",
+      "chunk": "Thanks a lot for your help.",
+      "meaningVi": "Cảm ơn bạn nhiều vì đã giúp.",
+      "example": "It works now — thanks a lot for your help!",
+      "exampleVi": "Giờ chạy được rồi — cảm ơn bạn nhiều vì đã giúp!",
+      "cue": "Cảm ơn sau khi được đồng nghiệp hỗ trợ",
+      "cloze": "Thanks a lot for your ___ .",
+      "audio": "afh-010"
+    },
+    {
+      "id": "afh-011",
+      "chunk": "Could you write that down for me?",
+      "meaningVi": "Bạn viết ra giúp tôi được không?",
+      "example": "That's a lot of steps — could you write that down for me?",
+      "exampleVi": "Nhiều bước quá — bạn viết ra giúp tôi được không?",
+      "cue": "Bạn sợ quên và muốn người kia ghi lại hướng dẫn",
+      "cloze": "Could you ___ that ___ for me?",
+      "audio": "afh-011"
+    },
+    {
+      "id": "afh-012",
+      "chunk": "Sorry to bother you again.",
+      "meaningVi": "Xin lỗi lại làm phiền bạn lần nữa.",
+      "example": "Sorry to bother you again — one more quick question.",
+      "exampleVi": "Xin lỗi lại làm phiền bạn — thêm một câu hỏi nhanh nữa thôi.",
+      "cue": "Bạn phải hỏi cùng một người lần thứ hai",
+      "cloze": "Sorry to ___ you again.",
+      "audio": "afh-012"
+    },
+    {
+      "id": "afh-013",
+      "chunk": "I have a quick question.",
+      "meaningVi": "Tôi có một câu hỏi nhanh.",
+      "example": "Hi, I have a quick question about the new process.",
+      "exampleVi": "Chào bạn, tôi có câu hỏi nhanh về quy trình mới.",
+      "cue": "Mở đầu khi muốn hỏi đồng nghiệp một việc nhỏ",
+      "cloze": "I have a ___ question.",
+      "audio": "afh-013"
+    },
+    {
+      "id": "afh-014",
+      "chunk": "Could you say that again, please?",
+      "meaningVi": "Bạn nói lại lần nữa được không?",
+      "example": "Could you say that again, please? The line was breaking up.",
+      "exampleVi": "Bạn nói lại được không? Đường truyền bị đứt quãng.",
+      "cue": "Yêu cầu người kia lặp lại câu vừa nói",
+      "cloze": "Could you ___ that again, please?",
+      "audio": "afh-014"
+    },
+    {
+      "id": "afh-015",
+      "chunk": "I really appreciate it.",
+      "meaningVi": "Tôi thật sự rất cảm kích.",
+      "example": "You saved me hours of work — I really appreciate it.",
+      "exampleVi": "Bạn giúp tôi tiết kiệm hàng giờ — tôi thật sự rất cảm kích.",
+      "cue": "Cảm ơn một cách chân thành hơn câu 'thank you'",
+      "cloze": "I really ___ it.",
+      "audio": "afh-015"
+    }
+  ]
+}

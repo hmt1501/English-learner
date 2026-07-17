@@ -1,0 +1,17 @@
+{
+  "id": "sc-problems-01",
+  "topic": "problems-apologies",
+  "titleVi": "Gửi nhầm file cho khách",
+  "contextVi": "Bạn phát hiện mình vừa gửi nhầm bản nháp (draft) thay vì bản cuối cho khách hàng. Khách nhắn lại thắc mắc vì file có nhiều chỗ chưa hoàn thiện.",
+  "taskVi": "Xin lỗi chuyên nghiệp, nhận lỗi, và gửi lại bản đúng ngay lập tức.",
+  "thread": [
+    { "from": "Mr. Brown (Khách hàng)", "text": "Hi, I just opened the proposal but some sections look unfinished. Is this the right file?" }
+  ],
+  "hints": ["My apologies", "that was my mistake", "here is the correct version"],
+  "modelAnswers": [
+    { "style": "formal", "text": "Hi Mr. Brown, my apologies — that was my mistake. I sent you the draft version instead of the final one. Here is the correct file. Please disregard the earlier one, and sorry for any confusion." },
+    { "style": "neutral", "text": "Hi Mr. Brown, I'm so sorry — I sent the wrong file. That was the draft version. I've just sent the final proposal — please check the new attachment. It won't happen again!" }
+  ],
+  "rubricVi": ["Có xin lỗi ngay đầu tin?", "Có nhận lỗi rõ ràng?", "Có gửi lại bản đúng / hành động khắc phục?", "Giọng điệu chuyên nghiệp với khách hàng?"],
+  "srsCards": ["pro-011", "pro-002", "pro-003"]
+}

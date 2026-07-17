@@ -1,0 +1,157 @@
+{
+  "id": "scheduling",
+  "topic": "scheduling",
+  "titleVi": "Hẹn lịch & deadline",
+  "cards": [
+    {
+      "id": "sch-001",
+      "chunk": "Are you free on Thursday?",
+      "meaningVi": "Thứ Năm bạn rảnh không?",
+      "example": "Are you free on Thursday? I'd like to review the plan together.",
+      "exampleVi": "Thứ Năm bạn rảnh không? Tôi muốn cùng xem lại kế hoạch.",
+      "cue": "Hỏi lịch rảnh của đồng nghiệp để hẹn họp",
+      "cloze": "Are you ___ on Thursday?",
+      "audio": "sch-001"
+    },
+    {
+      "id": "sch-002",
+      "chunk": "Can we push the meeting back?",
+      "meaningVi": "Chúng ta dời cuộc họp muộn hơn được không?",
+      "example": "Something came up — can we push the meeting back an hour?",
+      "exampleVi": "Có việc đột xuất — dời cuộc họp muộn một tiếng được không?",
+      "cue": "Bạn muốn dời cuộc họp sang giờ muộn hơn",
+      "cloze": "Can we ___ the meeting ___ ?",
+      "audio": "sch-002"
+    },
+    {
+      "id": "sch-003",
+      "chunk": "What time works for you?",
+      "meaningVi": "Mấy giờ thì tiện cho bạn?",
+      "example": "I'm flexible tomorrow — what time works for you?",
+      "exampleVi": "Mai tôi giờ nào cũng được — mấy giờ tiện cho bạn?",
+      "cue": "Để người kia chọn giờ họp",
+      "cloze": "What time ___ for you?",
+      "audio": "sch-003"
+    },
+    {
+      "id": "sch-004",
+      "chunk": "Let's schedule a call.",
+      "meaningVi": "Chúng ta hẹn một cuộc gọi nhé.",
+      "example": "This is hard to explain by text — let's schedule a call.",
+      "exampleVi": "Cái này khó giải thích qua tin nhắn — hẹn một cuộc gọi nhé.",
+      "cue": "Vấn đề phức tạp, bạn muốn gọi điện thay vì nhắn tin",
+      "cloze": "Let's ___ a call.",
+      "audio": "sch-004"
+    },
+    {
+      "id": "sch-005",
+      "chunk": "When is the deadline?",
+      "meaningVi": "Khi nào là hạn chót?",
+      "example": "Before I start — when is the deadline for this task?",
+      "exampleVi": "Trước khi bắt đầu — khi nào là hạn chót của việc này?",
+      "cue": "Hỏi thời hạn hoàn thành khi nhận việc mới",
+      "cloze": "When is the ___ ?",
+      "audio": "sch-005"
+    },
+    {
+      "id": "sch-006",
+      "chunk": "Does Monday morning suit you?",
+      "meaningVi": "Sáng thứ Hai có tiện cho bạn không?",
+      "example": "Does Monday morning suit you, say 9 AM?",
+      "exampleVi": "Sáng thứ Hai có tiện cho bạn không, khoảng 9 giờ?",
+      "cue": "Đề xuất một thời điểm cụ thể cho cuộc hẹn",
+      "cloze": "Does Monday morning ___ you?",
+      "audio": "sch-006"
+    },
+    {
+      "id": "sch-007",
+      "chunk": "I have another meeting at that time.",
+      "meaningVi": "Giờ đó tôi có cuộc họp khác.",
+      "example": "Sorry, I have another meeting at that time. How about 3 PM?",
+      "exampleVi": "Xin lỗi, giờ đó tôi có họp khác. 3 giờ chiều được không?",
+      "cue": "Từ chối giờ hẹn vì trùng lịch",
+      "cloze": "I have ___ meeting at that time.",
+      "audio": "sch-007"
+    },
+    {
+      "id": "sch-008",
+      "chunk": "Could we move it to next week?",
+      "meaningVi": "Chúng ta dời sang tuần sau được không?",
+      "example": "This week is full. Could we move it to next week?",
+      "exampleVi": "Tuần này kín lịch rồi. Dời sang tuần sau được không?",
+      "cue": "Đề nghị dời cuộc hẹn sang tuần kế tiếp",
+      "cloze": "Could we ___ it to next week?",
+      "audio": "sch-008"
+    },
+    {
+      "id": "sch-009",
+      "chunk": "I'll send you a calendar invite.",
+      "meaningVi": "Tôi sẽ gửi bạn lời mời trên lịch.",
+      "example": "Great, 2 PM Tuesday. I'll send you a calendar invite.",
+      "exampleVi": "Tuyệt, 2 giờ chiều thứ Ba. Tôi sẽ gửi lời mời trên lịch.",
+      "cue": "Chốt lịch họp và hứa gửi lời mời",
+      "cloze": "I'll send you a calendar ___ .",
+      "audio": "sch-009"
+    },
+    {
+      "id": "sch-010",
+      "chunk": "Can you make it at 2 PM?",
+      "meaningVi": "2 giờ chiều bạn đến được không?",
+      "example": "The room is free at 2. Can you make it at 2 PM?",
+      "exampleVi": "Phòng trống lúc 2 giờ. 2 giờ chiều bạn đến được không?",
+      "cue": "Hỏi xem người kia có tham gia được vào giờ đó không",
+      "cloze": "Can you ___ it at 2 PM?",
+      "audio": "sch-010"
+    },
+    {
+      "id": "sch-011",
+      "chunk": "Sorry, I need to reschedule.",
+      "meaningVi": "Xin lỗi, tôi cần đổi lịch hẹn.",
+      "example": "Sorry, I need to reschedule — my client meeting ran long.",
+      "exampleVi": "Xin lỗi, tôi cần đổi lịch — cuộc họp khách hàng kéo dài quá.",
+      "cue": "Bạn phải hủy và hẹn lại vì có việc đột xuất",
+      "cloze": "Sorry, I need to ___ .",
+      "audio": "sch-011"
+    },
+    {
+      "id": "sch-012",
+      "chunk": "Is the deadline flexible?",
+      "meaningVi": "Deadline có linh động được không?",
+      "example": "Is the deadline flexible, or is Friday fixed?",
+      "exampleVi": "Deadline có linh động không, hay thứ Sáu là cố định?",
+      "cue": "Hỏi xem hạn chót có thể lùi được không",
+      "cloze": "Is the deadline ___ ?",
+      "audio": "sch-012"
+    },
+    {
+      "id": "sch-013",
+      "chunk": "Let's aim for Wednesday.",
+      "meaningVi": "Chúng ta nhắm đến thứ Tư nhé.",
+      "example": "OK, let's aim for Wednesday and check progress on Monday.",
+      "exampleVi": "OK, nhắm đến thứ Tư nhé, thứ Hai kiểm tra tiến độ.",
+      "cue": "Đề xuất một mốc thời gian mục tiêu",
+      "cloze": "Let's ___ for Wednesday.",
+      "audio": "sch-013"
+    },
+    {
+      "id": "sch-014",
+      "chunk": "See you then!",
+      "meaningVi": "Hẹn gặp bạn lúc đó!",
+      "example": "Perfect, Tuesday at 10. See you then!",
+      "exampleVi": "Hoàn hảo, thứ Ba lúc 10 giờ. Hẹn gặp bạn lúc đó!",
+      "cue": "Kết thúc tin nhắn sau khi đã chốt lịch hẹn",
+      "cloze": "See you ___ !",
+      "audio": "sch-014"
+    },
+    {
+      "id": "sch-015",
+      "chunk": "I'm running late.",
+      "meaningVi": "Tôi đang bị trễ.",
+      "example": "I'm running late — traffic is terrible. Ten more minutes.",
+      "exampleVi": "Tôi đang bị trễ — kẹt xe kinh khủng. Mười phút nữa tới.",
+      "cue": "Báo trước rằng bạn sẽ đến muộn cuộc hẹn",
+      "cloze": "I'm ___ late.",
+      "audio": "sch-015"
+    }
+  ]
+}

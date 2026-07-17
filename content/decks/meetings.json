@@ -1,0 +1,157 @@
+{
+  "id": "meetings",
+  "topic": "meetings",
+  "titleVi": "Họp hành",
+  "cards": [
+    {
+      "id": "mtg-001",
+      "chunk": "Do you have a minute?",
+      "meaningVi": "Bạn rảnh một phút không?",
+      "example": "Hi Lan, do you have a minute? I want to ask about the report.",
+      "exampleVi": "Chào Lan, bạn rảnh một phút không? Tôi muốn hỏi về báo cáo.",
+      "cue": "Bạn muốn nói chuyện nhanh với đồng nghiệp đang bận",
+      "cloze": "Do you have a ___ ?",
+      "audio": "mtg-001"
+    },
+    {
+      "id": "mtg-002",
+      "chunk": "Let's get started.",
+      "meaningVi": "Chúng ta bắt đầu thôi.",
+      "example": "Everyone's here, so let's get started.",
+      "exampleVi": "Mọi người đến đủ rồi, chúng ta bắt đầu thôi.",
+      "cue": "Mở đầu cuộc họp khi mọi người đã có mặt",
+      "cloze": "Let's get ___ .",
+      "audio": "mtg-002"
+    },
+    {
+      "id": "mtg-003",
+      "chunk": "Can everyone hear me?",
+      "meaningVi": "Mọi người nghe tôi rõ không?",
+      "example": "Hi all, can everyone hear me? My connection is a bit slow.",
+      "exampleVi": "Chào mọi người, nghe tôi rõ không? Mạng của tôi hơi chậm.",
+      "cue": "Bạn vừa vào cuộc họp online và muốn kiểm tra âm thanh",
+      "cloze": "Can everyone ___ me?",
+      "audio": "mtg-003"
+    },
+    {
+      "id": "mtg-004",
+      "chunk": "I'd like to add something.",
+      "meaningVi": "Tôi muốn bổ sung một chút.",
+      "example": "Before we move on, I'd like to add something.",
+      "exampleVi": "Trước khi chuyển phần, tôi muốn bổ sung một chút.",
+      "cue": "Bạn muốn góp thêm ý kiến trong cuộc họp",
+      "cloze": "I'd like to ___ something.",
+      "audio": "mtg-004"
+    },
+    {
+      "id": "mtg-005",
+      "chunk": "Could you share your screen?",
+      "meaningVi": "Bạn chia sẻ màn hình được không?",
+      "example": "Could you share your screen so we can see the numbers?",
+      "exampleVi": "Bạn chia sẻ màn hình để chúng tôi xem số liệu được không?",
+      "cue": "Trong họp online, bạn muốn xem tài liệu của người khác",
+      "cloze": "Could you ___ your screen?",
+      "audio": "mtg-005"
+    },
+    {
+      "id": "mtg-006",
+      "chunk": "Let's move on to the next point.",
+      "meaningVi": "Chuyển sang điểm tiếp theo nào.",
+      "example": "OK, we agree on this. Let's move on to the next point.",
+      "exampleVi": "OK, chúng ta thống nhất rồi. Chuyển sang điểm tiếp theo nào.",
+      "cue": "Bạn muốn chuyển sang chủ đề khác trong cuộc họp",
+      "cloze": "Let's ___ on to the next point.",
+      "audio": "mtg-006"
+    },
+    {
+      "id": "mtg-007",
+      "chunk": "Sorry to interrupt, but...",
+      "meaningVi": "Xin lỗi vì ngắt lời, nhưng...",
+      "example": "Sorry to interrupt, but we only have five minutes left.",
+      "exampleVi": "Xin lỗi vì ngắt lời, nhưng chúng ta chỉ còn năm phút.",
+      "cue": "Bạn cần chen vào khi người khác đang nói",
+      "cloze": "Sorry to ___ , but...",
+      "audio": "mtg-007"
+    },
+    {
+      "id": "mtg-008",
+      "chunk": "What do you think?",
+      "meaningVi": "Bạn nghĩ sao?",
+      "example": "I suggest we launch next month. What do you think?",
+      "exampleVi": "Tôi đề xuất ra mắt tháng sau. Bạn nghĩ sao?",
+      "cue": "Bạn muốn hỏi ý kiến người khác sau khi đề xuất",
+      "cloze": "What do you ___ ?",
+      "audio": "mtg-008"
+    },
+    {
+      "id": "mtg-009",
+      "chunk": "I agree with you.",
+      "meaningVi": "Tôi đồng ý với bạn.",
+      "example": "I agree with you — we should wait for more data.",
+      "exampleVi": "Tôi đồng ý với bạn — chúng ta nên chờ thêm dữ liệu.",
+      "cue": "Bày tỏ sự đồng tình với ý kiến vừa nêu",
+      "cloze": "I ___ with you.",
+      "audio": "mtg-009"
+    },
+    {
+      "id": "mtg-010",
+      "chunk": "I see it differently.",
+      "meaningVi": "Tôi có cách nhìn khác.",
+      "example": "I see it differently — I think the price is too high.",
+      "exampleVi": "Tôi có cách nhìn khác — tôi nghĩ giá này quá cao.",
+      "cue": "Bạn không đồng ý nhưng muốn nói một cách lịch sự",
+      "cloze": "I see it ___ .",
+      "audio": "mtg-010"
+    },
+    {
+      "id": "mtg-011",
+      "chunk": "Let's take this offline.",
+      "meaningVi": "Chúng ta trao đổi riêng sau nhé.",
+      "example": "This is a detail — let's take this offline and move on.",
+      "exampleVi": "Đây là chi tiết nhỏ — trao đổi riêng sau nhé, giờ đi tiếp.",
+      "cue": "Vấn đề nhỏ không cần bàn trong cuộc họp chung",
+      "cloze": "Let's take this ___ .",
+      "audio": "mtg-011"
+    },
+    {
+      "id": "mtg-012",
+      "chunk": "To sum up, ...",
+      "meaningVi": "Tóm lại, ...",
+      "example": "To sum up, we'll finish the design this week and test next week.",
+      "exampleVi": "Tóm lại, tuần này xong thiết kế và tuần sau kiểm thử.",
+      "cue": "Kết thúc cuộc họp bằng phần tóm tắt",
+      "cloze": "To ___ up, ...",
+      "audio": "mtg-012"
+    },
+    {
+      "id": "mtg-013",
+      "chunk": "Who will take notes?",
+      "meaningVi": "Ai sẽ ghi biên bản?",
+      "example": "Before we start — who will take notes today?",
+      "exampleVi": "Trước khi bắt đầu — hôm nay ai ghi biên bản?",
+      "cue": "Phân công người ghi chép đầu cuộc họp",
+      "cloze": "Who will take ___ ?",
+      "audio": "mtg-013"
+    },
+    {
+      "id": "mtg-014",
+      "chunk": "Can we schedule a follow-up?",
+      "meaningVi": "Chúng ta hẹn một buổi họp tiếp theo được không?",
+      "example": "We're out of time. Can we schedule a follow-up on Friday?",
+      "exampleVi": "Hết giờ rồi. Chúng ta hẹn họp tiếp vào thứ Sáu được không?",
+      "cue": "Cuộc họp chưa xong việc và cần hẹn buổi khác",
+      "cloze": "Can we schedule a ___ ?",
+      "audio": "mtg-014"
+    },
+    {
+      "id": "mtg-015",
+      "chunk": "Any questions before we finish?",
+      "meaningVi": "Còn câu hỏi nào trước khi kết thúc không?",
+      "example": "That's all from me. Any questions before we finish?",
+      "exampleVi": "Tôi trình bày xong rồi. Còn câu hỏi nào trước khi kết thúc không?",
+      "cue": "Kết thúc phần trình bày và mời mọi người hỏi",
+      "cloze": "Any ___ before we finish?",
+      "audio": "mtg-015"
+    }
+  ]
+}

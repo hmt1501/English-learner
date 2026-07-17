@@ -1,0 +1,17 @@
+{
+  "id": "sc-status-01",
+  "topic": "status-reporting",
+  "titleVi": "Cập nhật tiến độ cuối ngày",
+  "contextVi": "Cuối ngày làm việc, quản lý dự án nhắn hỏi tình hình công việc trong ngày của bạn. Hôm nay bạn đã xong phần kiểm thử, còn phần tài liệu làm được một nửa.",
+  "taskVi": "Báo cáo ngắn gọn: việc đã xong, việc đang làm dở, và kế hoạch ngày mai.",
+  "thread": [
+    { "from": "Ms. Emma (Quản lý dự án)", "text": "Hi! Quick check-in before I log off — how did today go?" }
+  ],
+  "hints": ["I've finished...", "I've completed about half of...", "I'll continue tomorrow"],
+  "modelAnswers": [
+    { "style": "neutral", "text": "Hi Emma! Today went well. I've finished the testing, and I've completed about half of the documentation. I'll continue with the docs tomorrow morning and should finish by noon." },
+    { "style": "formal", "text": "Hi Emma, here's a quick update: testing is done with no major issues. The documentation is about 50% complete — I plan to finish it by tomorrow noon. Everything is on track." }
+  ],
+  "rubricVi": ["Có nêu việc đã hoàn thành?", "Có nêu việc đang dở và mức độ hoàn thành?", "Có kế hoạch cho ngày mai?"],
+  "srsCards": ["str-001", "str-012", "str-004"]
+}

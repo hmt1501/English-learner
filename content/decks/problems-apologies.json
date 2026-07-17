@@ -1,0 +1,157 @@
+{
+  "id": "problems-apologies",
+  "topic": "problems-apologies",
+  "titleVi": "Sự cố & xin lỗi",
+  "cards": [
+    {
+      "id": "pro-001",
+      "chunk": "I'm sorry for the delay.",
+      "meaningVi": "Tôi xin lỗi vì sự chậm trễ.",
+      "example": "I'm sorry for the delay — the report is attached now.",
+      "exampleVi": "Tôi xin lỗi vì chậm trễ — báo cáo đã đính kèm rồi ạ.",
+      "cue": "Xin lỗi khi giao việc muộn hơn đã hứa",
+      "cloze": "I'm sorry for the ___ .",
+      "audio": "pro-001"
+    },
+    {
+      "id": "pro-002",
+      "chunk": "That was my mistake.",
+      "meaningVi": "Đó là lỗi của tôi.",
+      "example": "That was my mistake — I sent the wrong version.",
+      "exampleVi": "Đó là lỗi của tôi — tôi đã gửi nhầm phiên bản.",
+      "cue": "Nhận lỗi một cách thẳng thắn",
+      "cloze": "That was my ___ .",
+      "audio": "pro-002"
+    },
+    {
+      "id": "pro-003",
+      "chunk": "It won't happen again.",
+      "meaningVi": "Việc này sẽ không xảy ra nữa.",
+      "example": "I've set a reminder — it won't happen again.",
+      "exampleVi": "Tôi đã đặt lời nhắc — việc này sẽ không xảy ra nữa.",
+      "cue": "Cam kết không lặp lại sai sót",
+      "cloze": "It won't ___ again.",
+      "audio": "pro-003"
+    },
+    {
+      "id": "pro-004",
+      "chunk": "I'll fix it right away.",
+      "meaningVi": "Tôi sẽ sửa ngay lập tức.",
+      "example": "Thanks for catching that — I'll fix it right away.",
+      "exampleVi": "Cảm ơn đã phát hiện — tôi sẽ sửa ngay lập tức.",
+      "cue": "Phản hồi khi ai đó chỉ ra lỗi trong công việc của bạn",
+      "cloze": "I'll fix it right ___ .",
+      "audio": "pro-004"
+    },
+    {
+      "id": "pro-005",
+      "chunk": "The system is down.",
+      "meaningVi": "Hệ thống đang bị sập.",
+      "example": "We can't process orders — the system is down.",
+      "exampleVi": "Chúng tôi không xử lý đơn được — hệ thống đang sập.",
+      "cue": "Báo rằng phần mềm/máy chủ ngừng hoạt động",
+      "cloze": "The system is ___ .",
+      "audio": "pro-005"
+    },
+    {
+      "id": "pro-006",
+      "chunk": "We're looking into it.",
+      "meaningVi": "Chúng tôi đang tìm hiểu vấn đề.",
+      "example": "We've seen the error — we're looking into it now.",
+      "exampleVi": "Chúng tôi đã thấy lỗi — đang tìm hiểu ngay đây.",
+      "cue": "Trấn an rằng vấn đề đang được điều tra",
+      "cloze": "We're ___ into it.",
+      "audio": "pro-006"
+    },
+    {
+      "id": "pro-007",
+      "chunk": "Thanks for your patience.",
+      "meaningVi": "Cảm ơn bạn đã kiên nhẫn chờ.",
+      "example": "The issue is fixed now. Thanks for your patience.",
+      "exampleVi": "Sự cố đã được khắc phục. Cảm ơn bạn đã kiên nhẫn chờ.",
+      "cue": "Cảm ơn khách/đồng nghiệp sau khi họ phải chờ đợi",
+      "cloze": "Thanks for your ___ .",
+      "audio": "pro-007"
+    },
+    {
+      "id": "pro-008",
+      "chunk": "I missed the email.",
+      "meaningVi": "Tôi đã bỏ lỡ email đó.",
+      "example": "Sorry, I missed the email — my inbox was very full.",
+      "exampleVi": "Xin lỗi, tôi đã bỏ lỡ email — hộp thư của tôi đầy quá.",
+      "cue": "Giải thích vì sao bạn không trả lời email",
+      "cloze": "I ___ the email.",
+      "audio": "pro-008"
+    },
+    {
+      "id": "pro-009",
+      "chunk": "Let me look into it and get back to you.",
+      "meaningVi": "Để tôi tìm hiểu rồi trả lời bạn sau.",
+      "example": "Good question. Let me look into it and get back to you.",
+      "exampleVi": "Câu hỏi hay. Để tôi tìm hiểu rồi trả lời bạn sau.",
+      "cue": "Bạn chưa có câu trả lời ngay và cần thời gian kiểm tra",
+      "cloze": "Let me look ___ it and get back to you.",
+      "audio": "pro-009"
+    },
+    {
+      "id": "pro-010",
+      "chunk": "There's been a misunderstanding.",
+      "meaningVi": "Đã có một sự hiểu lầm.",
+      "example": "There's been a misunderstanding — I meant next Friday.",
+      "exampleVi": "Đã có sự hiểu lầm — ý tôi là thứ Sáu tuần sau.",
+      "cue": "Làm rõ khi hai bên hiểu khác nhau",
+      "cloze": "There's been a ___ .",
+      "audio": "pro-010"
+    },
+    {
+      "id": "pro-011",
+      "chunk": "My apologies for the confusion.",
+      "meaningVi": "Tôi xin lỗi vì sự nhầm lẫn.",
+      "example": "My apologies for the confusion — here is the correct link.",
+      "exampleVi": "Xin lỗi vì sự nhầm lẫn — đây là đường dẫn đúng.",
+      "cue": "Xin lỗi trang trọng khi thông tin bạn đưa gây rối",
+      "cloze": "My ___ for the confusion.",
+      "audio": "pro-011"
+    },
+    {
+      "id": "pro-012",
+      "chunk": "Can we find a solution together?",
+      "meaningVi": "Chúng ta cùng tìm giải pháp được không?",
+      "example": "This affects both teams — can we find a solution together?",
+      "exampleVi": "Việc này ảnh hưởng cả hai nhóm — cùng tìm giải pháp nhé?",
+      "cue": "Đề nghị hợp tác giải quyết vấn đề thay vì đổ lỗi",
+      "cloze": "Can we find a ___ together?",
+      "audio": "pro-012"
+    },
+    {
+      "id": "pro-013",
+      "chunk": "It was out of my control.",
+      "meaningVi": "Việc đó nằm ngoài tầm kiểm soát của tôi.",
+      "example": "The power went out — it was out of my control.",
+      "exampleVi": "Mất điện đột ngột — việc đó ngoài tầm kiểm soát của tôi.",
+      "cue": "Giải thích sự cố do nguyên nhân khách quan",
+      "cloze": "It was out of my ___ .",
+      "audio": "pro-013"
+    },
+    {
+      "id": "pro-014",
+      "chunk": "How can I make it right?",
+      "meaningVi": "Tôi có thể khắc phục thế nào?",
+      "example": "I know this caused trouble. How can I make it right?",
+      "exampleVi": "Tôi biết việc này gây phiền phức. Tôi có thể khắc phục thế nào?",
+      "cue": "Chủ động hỏi cách sửa sai sau khi mắc lỗi",
+      "cloze": "How can I make it ___ ?",
+      "audio": "pro-014"
+    },
+    {
+      "id": "pro-015",
+      "chunk": "Everything is back to normal.",
+      "meaningVi": "Mọi thứ đã trở lại bình thường.",
+      "example": "The server was restarted and everything is back to normal.",
+      "exampleVi": "Máy chủ đã khởi động lại và mọi thứ trở lại bình thường.",
+      "cue": "Thông báo sự cố đã được khắc phục hoàn toàn",
+      "cloze": "Everything is back to ___ .",
+      "audio": "pro-015"
+    }
+  ]
+}

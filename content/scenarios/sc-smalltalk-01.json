@@ -1,0 +1,17 @@
+{
+  "id": "sc-smalltalk-01",
+  "topic": "small-talk",
+  "titleVi": "Đồng nghiệp mới chào hỏi",
+  "contextVi": "Một đồng nghiệp nước ngoài mới vào công ty nhắn tin làm quen với bạn qua nhóm chat chung.",
+  "taskVi": "Chào lại thân thiện, giới thiệu ngắn về bạn (tên nhóm/công việc), và chào đón họ vào công ty.",
+  "thread": [
+    { "from": "James (Đồng nghiệp mới)", "text": "Hi everyone! I'm James, just joined the marketing team this week. Nice to meet you all!" }
+  ],
+  "hints": ["Welcome to the team", "I'm on the ... team", "Feel free to reach out"],
+  "modelAnswers": [
+    { "style": "friendly", "text": "Hi James, welcome to the team! I'm Linh, I'm on the accounting team — we sit near the window on the 3rd floor. Feel free to reach out if you need anything. Nice to meet you!" },
+    { "style": "neutral", "text": "Welcome, James! Nice to meet you. I'm Linh from the accounting team. If you have any questions about the office, feel free to ask. Hope you enjoy working here!" }
+  ],
+  "rubricVi": ["Có chào đón thân thiện?", "Có giới thiệu tên và nhóm của bạn?", "Có đề nghị sẵn sàng hỗ trợ?"],
+  "srsCards": ["smt-012", "smt-013", "req-013"]
+}

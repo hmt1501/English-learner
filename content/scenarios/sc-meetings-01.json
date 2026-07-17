@@ -1,0 +1,17 @@
+{
+  "id": "sc-meetings-01",
+  "topic": "meetings",
+  "titleVi": "Được mời họp gấp nhưng bận",
+  "contextVi": "Trưởng nhóm nhắn mời bạn họp lúc 2 giờ chiều nay, nhưng lúc đó bạn đã có cuộc gọi với khách hàng.",
+  "taskVi": "Báo rằng bạn bận lúc 2 giờ, đề xuất giờ khác (ví dụ 4 giờ), hoặc xin nhận biên bản họp.",
+  "thread": [
+    { "from": "Kevin (Trưởng nhóm)", "text": "Team meeting at 2 PM today to discuss the new project. Can you join?" }
+  ],
+  "hints": ["I have another meeting at that time", "Could we move it to...?", "keep me in the loop"],
+  "modelAnswers": [
+    { "style": "neutral", "text": "Hi Kevin, sorry — I have a client call at 2 PM. Could we move it to 4 PM? If not, please keep me in the loop and I'll read the meeting notes after." },
+    { "style": "formal", "text": "Hi Kevin, I'm afraid I have another meeting at that time (a client call from 2 to 3). Would 4 PM work instead? If the team can't change it, could you share the notes with me afterwards? Thank you." }
+  ],
+  "rubricVi": ["Có nêu lý do bận rõ ràng?", "Có đề xuất giờ thay thế?", "Có phương án dự phòng (xin biên bản)?"],
+  "srsCards": ["sch-007", "sch-008", "req-014"]
+}

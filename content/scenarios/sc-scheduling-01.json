@@ -1,0 +1,17 @@
+{
+  "id": "sc-scheduling-01",
+  "topic": "scheduling",
+  "titleVi": "Xin lùi deadline báo cáo",
+  "contextVi": "Sếp nhắn lúc 4 giờ chiều. Bạn chưa xong báo cáo vì dữ liệu về trễ.",
+  "taskVi": "Xin thêm thời gian đến sáng mai, một cách lịch sự. Nêu lý do ngắn gọn và đưa ra thời gian cụ thể.",
+  "thread": [
+    { "from": "Mr. David (Sếp)", "text": "Hi, is the report ready? I need it for tomorrow's meeting." }
+  ],
+  "hints": ["I'm sorry for the delay", "the data arrived late", "first thing tomorrow morning"],
+  "modelAnswers": [
+    { "style": "neutral", "text": "Hi David, sorry for the delay. The data arrived late, so it's not ready yet. It's almost done — I can send it first thing tomorrow morning, before 9 AM. Would that work?" },
+    { "style": "formal", "text": "Hi David, I apologize for the delay. The sales data came in late this afternoon, so the report isn't finished yet. I will send it to you by 8:30 tomorrow morning, well before the meeting. Sorry for any inconvenience." }
+  ],
+  "rubricVi": ["Có xin lỗi vì trễ?", "Có nêu lý do ngắn gọn?", "Có đưa ra thời gian cụ thể?", "Có câu hỏi/lời xác nhận cuối tin?"],
+  "srsCards": ["pro-001", "str-009", "str-006"]
+}

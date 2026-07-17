@@ -1,0 +1,157 @@
+{
+  "id": "chat-email-phrases",
+  "topic": "chat-email-phrases",
+  "titleVi": "Cụm từ nhắn tin & email",
+  "cards": [
+    {
+      "id": "cep-001",
+      "chunk": "I'll get back to you shortly.",
+      "meaningVi": "Tôi sẽ trả lời bạn sớm.",
+      "example": "Let me check with the team — I'll get back to you shortly.",
+      "exampleVi": "Để tôi hỏi nhóm — tôi sẽ trả lời bạn sớm.",
+      "cue": "Bạn cần thời gian kiểm tra trước khi trả lời tin nhắn",
+      "cloze": "I'll get ___ to you shortly.",
+      "audio": "cep-001"
+    },
+    {
+      "id": "cep-002",
+      "chunk": "Noted, thanks!",
+      "meaningVi": "Đã ghi nhận, cảm ơn!",
+      "example": "Noted, thanks! I'll update the file today.",
+      "exampleVi": "Đã ghi nhận, cảm ơn! Tôi sẽ cập nhật file hôm nay.",
+      "cue": "Xác nhận ngắn gọn rằng bạn đã đọc và hiểu tin nhắn",
+      "cloze": "___ , thanks!",
+      "audio": "cep-002"
+    },
+    {
+      "id": "cep-003",
+      "chunk": "Please see the attached file.",
+      "meaningVi": "Vui lòng xem file đính kèm.",
+      "example": "Please see the attached file for the full report.",
+      "exampleVi": "Vui lòng xem file đính kèm để xem báo cáo đầy đủ.",
+      "cue": "Bạn gửi email kèm theo một file",
+      "cloze": "Please see the ___ file.",
+      "audio": "cep-003"
+    },
+    {
+      "id": "cep-004",
+      "chunk": "Sorry for the late reply.",
+      "meaningVi": "Xin lỗi vì trả lời muộn.",
+      "example": "Sorry for the late reply, I was in a meeting all morning.",
+      "exampleVi": "Xin lỗi vì trả lời muộn, tôi họp cả buổi sáng.",
+      "cue": "Bạn trả lời tin nhắn sau vài tiếng vì bận",
+      "cloze": "Sorry for the ___ reply.",
+      "audio": "cep-004"
+    },
+    {
+      "id": "cep-005",
+      "chunk": "Could you send it over?",
+      "meaningVi": "Bạn gửi nó qua cho tôi được không?",
+      "example": "The design looks good. Could you send it over?",
+      "exampleVi": "Thiết kế trông ổn đấy. Bạn gửi qua cho tôi được không?",
+      "cue": "Bạn muốn đồng nghiệp gửi một file cho bạn",
+      "cloze": "Could you ___ it ___?",
+      "audio": "cep-005"
+    },
+    {
+      "id": "cep-006",
+      "chunk": "Just a quick reminder.",
+      "meaningVi": "Chỉ là lời nhắc nhanh.",
+      "example": "Just a quick reminder — the deadline is this Friday.",
+      "exampleVi": "Chỉ nhắc nhanh — deadline là thứ Sáu này.",
+      "cue": "Bạn muốn nhắc đồng nghiệp về một việc sắp đến hạn",
+      "cloze": "Just a quick ___ .",
+      "audio": "cep-006"
+    },
+    {
+      "id": "cep-007",
+      "chunk": "Let me know if you have any questions.",
+      "meaningVi": "Cho tôi biết nếu bạn có câu hỏi nào.",
+      "example": "I've shared the plan. Let me know if you have any questions.",
+      "exampleVi": "Tôi đã chia sẻ kế hoạch. Cho tôi biết nếu bạn có câu hỏi nào.",
+      "cue": "Kết thúc email sau khi gửi tài liệu cho đồng nghiệp",
+      "cloze": "Let me ___ if you have any questions.",
+      "audio": "cep-007"
+    },
+    {
+      "id": "cep-008",
+      "chunk": "I'm on it.",
+      "meaningVi": "Tôi đang làm ngay đây.",
+      "example": "\"Can you fix this bug today?\" — \"I'm on it.\"",
+      "exampleVi": "\"Bạn sửa lỗi này hôm nay được không?\" — \"Tôi đang làm ngay đây.\"",
+      "cue": "Sếp giao việc và bạn muốn nói bạn bắt tay làm ngay",
+      "cloze": "I'm ___ it.",
+      "audio": "cep-008"
+    },
+    {
+      "id": "cep-009",
+      "chunk": "Does that work for you?",
+      "meaningVi": "Như vậy có ổn với bạn không?",
+      "example": "I can send it by 3 PM. Does that work for you?",
+      "exampleVi": "Tôi có thể gửi trước 3 giờ chiều. Như vậy có ổn với bạn không?",
+      "cue": "Bạn đề xuất một phương án và muốn hỏi ý người kia",
+      "cloze": "Does that ___ for you?",
+      "audio": "cep-009"
+    },
+    {
+      "id": "cep-010",
+      "chunk": "Thanks for the heads-up.",
+      "meaningVi": "Cảm ơn đã báo trước.",
+      "example": "Thanks for the heads-up about the schedule change.",
+      "exampleVi": "Cảm ơn đã báo trước về việc thay đổi lịch.",
+      "cue": "Đồng nghiệp báo cho bạn biết trước một thay đổi",
+      "cloze": "Thanks for the ___ .",
+      "audio": "cep-010"
+    },
+    {
+      "id": "cep-011",
+      "chunk": "I'll keep you posted.",
+      "meaningVi": "Tôi sẽ cập nhật cho bạn thường xuyên.",
+      "example": "We're still waiting for the client. I'll keep you posted.",
+      "exampleVi": "Chúng tôi vẫn đang chờ khách hàng. Tôi sẽ cập nhật cho bạn.",
+      "cue": "Bạn hứa sẽ báo tin mới cho người kia khi có tiến triển",
+      "cloze": "I'll keep you ___ .",
+      "audio": "cep-011"
+    },
+    {
+      "id": "cep-012",
+      "chunk": "Could you clarify what you mean?",
+      "meaningVi": "Bạn có thể nói rõ hơn ý bạn không?",
+      "example": "Sorry, could you clarify what you mean by \"final version\"?",
+      "exampleVi": "Xin lỗi, bạn có thể nói rõ hơn \"bản cuối\" nghĩa là gì không?",
+      "cue": "Bạn đọc tin nhắn nhưng chưa hiểu rõ ý",
+      "cloze": "Could you ___ what you mean?",
+      "audio": "cep-012"
+    },
+    {
+      "id": "cep-013",
+      "chunk": "Looping in Anna.",
+      "meaningVi": "Thêm Anna vào cuộc trao đổi.",
+      "example": "Looping in Anna — she handles the design side.",
+      "exampleVi": "Thêm Anna vào — cô ấy phụ trách phần thiết kế.",
+      "cue": "Bạn thêm một người khác vào nhóm chat/email để cùng theo dõi",
+      "cloze": "___ in Anna.",
+      "audio": "cep-013"
+    },
+    {
+      "id": "cep-014",
+      "chunk": "Will do!",
+      "meaningVi": "Tôi sẽ làm!",
+      "example": "\"Please update the sheet before lunch.\" — \"Will do!\"",
+      "exampleVi": "\"Cập nhật bảng tính trước giờ ăn trưa nhé.\" — \"Tôi sẽ làm!\"",
+      "cue": "Trả lời ngắn gọn khi đồng ý làm điều được nhờ",
+      "cloze": "___ do!",
+      "audio": "cep-014"
+    },
+    {
+      "id": "cep-015",
+      "chunk": "Please confirm when you receive it.",
+      "meaningVi": "Vui lòng xác nhận khi bạn nhận được.",
+      "example": "I've sent the contract. Please confirm when you receive it.",
+      "exampleVi": "Tôi đã gửi hợp đồng. Vui lòng xác nhận khi bạn nhận được.",
+      "cue": "Bạn gửi tài liệu quan trọng và muốn người nhận xác nhận",
+      "cloze": "Please ___ when you receive it.",
+      "audio": "cep-015"
+    }
+  ]
+}

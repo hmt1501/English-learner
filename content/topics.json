@@ -1,0 +1,10 @@
+[
+  { "id": "chat-email-phrases", "titleVi": "Nhắn tin & email", "emoji": "💬", "descriptionVi": "Cụm từ trả lời tin nhắn và viết email công việc" },
+  { "id": "meetings", "titleVi": "Họp hành", "emoji": "📅", "descriptionVi": "Từ vựng và mẫu câu trong cuộc họp" },
+  { "id": "status-reporting", "titleVi": "Báo cáo tiến độ", "emoji": "📊", "descriptionVi": "Cập nhật tiến độ công việc với sếp và đồng nghiệp" },
+  { "id": "asking-for-help", "titleVi": "Nhờ giúp đỡ & hỏi lại", "emoji": "🙋", "descriptionVi": "Nhờ hỗ trợ và hỏi lại khi chưa hiểu" },
+  { "id": "scheduling", "titleVi": "Hẹn lịch & deadline", "emoji": "⏰", "descriptionVi": "Sắp xếp lịch họp, deadline, dời lịch" },
+  { "id": "small-talk", "titleVi": "Xã giao công sở", "emoji": "☕", "descriptionVi": "Trò chuyện thân thiện với đồng nghiệp" },
+  { "id": "requests-permissions", "titleVi": "Đề nghị & xin phép", "emoji": "🙏", "descriptionVi": "Nhờ vả lịch sự và xin phép nghỉ, đi trễ" },
+  { "id": "problems-apologies", "titleVi": "Sự cố & xin lỗi", "emoji": "⚠️", "descriptionVi": "Xử lý sự cố và xin lỗi chuyên nghiệp" }
+]
