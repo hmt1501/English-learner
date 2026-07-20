@@ -8,6 +8,8 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 English-learning PWA for a small group of Vietnamese office workers (pre-intermediate level). UI is 100% Vietnamese; English appears only in learning content. No backend, no auth — all learner data lives on-device (IndexedDB + localStorage) with JSON export/import backup in Settings.
 
+> **Full onboarding/handoff context: see [HANDOFF.md](HANDOFF.md)** — file map, data model, design decisions, intentional (non-bug) behaviors, and common fix pointers.
+
 ## Commands
 
 - `npm run dev` — dev server
