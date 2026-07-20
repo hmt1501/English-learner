@@ -16,6 +16,12 @@ type ChatMessage = {
   feedback?: string;
 };
 
+function formatError(err: unknown): string {
+  if (!(err instanceof AiError)) return "Có lỗi xảy ra — thử lại nhé";
+  // Kèm thông báo gốc của Google (nếu có) để dễ chẩn đoán
+  return err.detail ? `${err.message}\n\n(Google báo: ${err.detail})` : err.message;
+}
+
 function KeySetup() {
   const setGeminiKey = useProgress((s) => s.setGeminiKey);
   const [draft, setDraft] = useState("");
@@ -96,7 +102,7 @@ export default function AiChatPage() {
           userMessage,
         });
       } catch (err) {
-        setError(err instanceof AiError ? err.message : "Có lỗi xảy ra — thử lại nhé");
+        setError(formatError(err));
         return null;
       } finally {
         setLoading(false);
@@ -123,7 +129,7 @@ export default function AiChatPage() {
         });
         setMessages([{ role: "model", text: result.reply }]);
       } catch (err) {
-        setError(err instanceof AiError ? err.message : "Có lỗi xảy ra — thử lại nhé");
+        setError(formatError(err));
         setScenarioId(null);
       } finally {
         setLoading(false);
@@ -186,7 +192,7 @@ export default function AiChatPage() {
           ))}
         </div>
         {loading && <p className="mt-3 text-center text-sm text-muted">Alex đang vào chat... 💬</p>}
-        {error && <p className="mt-3 text-center text-sm text-red-500">{error}</p>}
+        {error && <p className="mt-3 whitespace-pre-line text-center text-sm text-red-500">{error}</p>}
         <p className="mt-4 text-center text-xs text-muted">
           Đổi API key trong <Link href="/settings" className="text-primary underline">Cài đặt</Link>
         </p>
@@ -243,7 +249,7 @@ export default function AiChatPage() {
           </div>
         )}
         {error && (
-          <p className="rounded-xl bg-red-50 px-3 py-2 text-center text-sm text-red-600 dark:bg-red-950 dark:text-red-300">
+          <p className="whitespace-pre-line rounded-xl bg-red-50 px-3 py-2 text-center text-sm text-red-600 dark:bg-red-950 dark:text-red-300">
             {error}
           </p>
         )}
