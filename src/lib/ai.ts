@@ -1,12 +1,14 @@
 // Gọi Google Gemini API (free tier) trực tiếp từ trình duyệt để luyện chat.
 // API key do người dùng tự tạo (miễn phí tại aistudio.google.com/apikey) và lưu trên máy.
 
-// Thử lần lượt; bản "-lite" có hạn mức miễn phí rộng hơn nên đặt xen vào làm phương án dự phòng.
+// Thử lần lượt. Bản "-lite" đặt trước vì hạn mức miễn phí theo ngày cao hơn hẳn
+// bản thường (~1000 so với ~250 request/ngày) mà vẫn đủ tốt cho chat A2-B1 —
+// quan trọng khi cả nhóm dùng chung một key.
 const MODELS = [
-  "gemini-2.5-flash",
-  "gemini-2.0-flash",
   "gemini-2.5-flash-lite",
   "gemini-2.0-flash-lite",
+  "gemini-2.5-flash",
+  "gemini-2.0-flash",
 ];
 
 export type AiTurn = { role: "user" | "model"; text: string };
@@ -138,14 +140,20 @@ export async function chatWithCoach(opts: {
     ...(userMessage ? [{ role: "user", parts: [{ text: userMessage }] }] : []),
   ];
 
-  const body = {
-    system_instruction: { parts: [{ text: systemPrompt(scenarioPrompt) }] },
-    contents,
-    generationConfig: { temperature: 0.8, maxOutputTokens: 600 },
-  };
-
   let lastError: AiError | undefined;
   for (const model of MODELS) {
+    const body = {
+      system_instruction: { parts: [{ text: systemPrompt(scenarioPrompt) }] },
+      contents,
+      generationConfig: {
+        temperature: 0.8,
+        maxOutputTokens: 600,
+        // Dòng 2.5 mặc định bật "thinking" — tốn hàng trăm token ẩn mỗi câu và có thể
+        // ngốn hết maxOutputTokens khiến trả về rỗng. Chat ngắn không cần → tắt hẳn.
+        // (Dòng 2.0 không nhận thinkingConfig, gửi vào sẽ bị lỗi 400.)
+        ...(model.startsWith("gemini-2.5") ? { thinkingConfig: { thinkingBudget: 0 } } : {}),
+      },
+    };
     try {
       const raw = await callGemini(apiKey, model, body);
       return parseCoachReply(raw);
