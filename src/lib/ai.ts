@@ -179,6 +179,19 @@ export async function chatWithCoach(opts: {
   // nhau trong thông báo, tách ra chỉ gây báo nhầm.
   if (lastError?.kind === "rate-limit") {
     const g = (lastError.raw ?? lastError.detail ?? "").toLowerCase();
+    // "limit: 0" = project KHÔNG có phần miễn phí nào (thường do đã bật billing hoặc là
+    // project Google Cloud). Phải kiểm tra TRƯỚC per-minute vì retry không bao giờ giúp được.
+    if (g.includes("limit: 0") || g.includes("limit:0")) {
+      throw new AiError(
+        "Key này thuộc một project KHÔNG có gói miễn phí (Google báo limit: 0), nên retry bao nhiêu cũng vô ích. " +
+          "Thường do project đó đã BẬT THANH TOÁN (billing) hoặc là project Google Cloud, không phải project mặc định của AI Studio. " +
+          "Cách xử lý: vào aistudio.google.com/apikey bằng một tài khoản Google CHƯA bật billing, " +
+          'tạo key mới trong project mặc định (ví dụ "My First Project"), và ĐỪNG bật billing cho project đó.',
+        "rate-limit",
+        lastError.detail,
+        lastError.raw
+      );
+    }
     if (g.includes("perminute") || g.includes("per minute")) {
       throw new AiError(
         "Gửi hơi nhanh, chạm giới hạn mỗi phút — chờ khoảng 1 phút rồi thử lại nhé (key vẫn tốt).",
