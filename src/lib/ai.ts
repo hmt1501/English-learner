@@ -64,8 +64,10 @@ export class AiError extends Error {
   constructor(
     message: string,
     public kind: "no-key" | "bad-key" | "rate-limit" | "not-found" | "network" | "other",
-    /** Thông báo gốc từ Google, để hiện chi tiết khi cần chẩn đoán */
-    public detail?: string
+    /** Thông báo gốc từ Google (sạch, để hiện cho người dùng) */
+    public detail?: string,
+    /** Toàn bộ chi tiết lỗi (message + status + details) — chỉ dùng để phân loại nội bộ */
+    public raw?: string
   ) {
     super(message);
   }
@@ -87,24 +89,28 @@ async function callGemini(apiKey: string, model: string, body: unknown): Promise
   }
 
   if (!res.ok) {
-    // Đọc thông báo lỗi gốc của Google để chẩn đoán chính xác
+    // Đọc lỗi gốc của Google. `message` để hiển thị; `raw` gộp cả status + details
+    // (chứa quotaId như "...PerDay..."/"...PerMinute...") để phân loại 429 cho chuẩn.
     let googleMsg = "";
+    let raw = "";
     try {
       const errData = await res.json();
-      googleMsg = errData?.error?.message ?? "";
+      const e = errData?.error ?? {};
+      googleMsg = e.message ?? "";
+      raw = `${e.message ?? ""} ${e.status ?? ""} ${e.details ? JSON.stringify(e.details) : ""}`.trim();
     } catch {
       // body không phải JSON — bỏ qua
     }
     if (res.status === 400 || res.status === 401 || res.status === 403) {
-      throw new AiError("API key không hợp lệ hoặc chưa được kích hoạt", "bad-key", googleMsg);
+      throw new AiError("API key không hợp lệ hoặc chưa được kích hoạt", "bad-key", googleMsg, raw);
     }
     if (res.status === 429) {
-      throw new AiError("rate-limit", "rate-limit", googleMsg);
+      throw new AiError("rate-limit", "rate-limit", googleMsg, raw);
     }
     if (res.status === 404) {
-      throw new AiError(`Model ${model} không khả dụng`, "not-found", googleMsg);
+      throw new AiError(`Model ${model} không khả dụng`, "not-found", googleMsg, raw);
     }
-    throw new AiError(`Lỗi máy chủ Gemini (${res.status})`, "other", googleMsg);
+    throw new AiError(`Lỗi máy chủ Gemini (${res.status})`, "other", googleMsg, raw);
   }
 
   const data = await res.json();
@@ -166,39 +172,28 @@ export async function chatWithCoach(opts: {
     }
   }
 
-  // Tất cả model đều thất bại. Phân loại 429 theo thông báo gốc của Google —
-  // lưu ý: mọi thông báo 429 đều chứa chữ "quota", nên phải nhận diện cụ thể
-  // "per minute" / "per day" / "limit: 0" chứ không được bắt chữ "quota" chung chung.
+  // Tất cả model đều thất bại. Phân loại 429 dựa trên quotaId trong error.details
+  // (gộp sẵn vào `raw`): "...PerMinute..." = giới hạn tức thời (chờ chút là được);
+  // còn lại (PerDay / FreeTier / limit 0) đều cùng cách xử lý nên gộp làm một —
+  // KHÔNG cố tách "hết hạn ngày" với "chưa có free tier" vì chúng gần như giống hệt
+  // nhau trong thông báo, tách ra chỉ gây báo nhầm.
   if (lastError?.kind === "rate-limit") {
-    const g = (lastError.detail ?? "").toLowerCase();
-    if (g.includes("limit: 0") || g.includes("limit value: 0") || g.includes("not available in your country")) {
+    const g = (lastError.raw ?? lastError.detail ?? "").toLowerCase();
+    if (g.includes("perminute") || g.includes("per minute")) {
       throw new AiError(
-        "Project của key này chưa được cấp gói miễn phí (hạn mức = 0). " +
-          "Vào aistudio.google.com/apikey, tạo key trong project mặc định của AI Studio " +
-          '(ví dụ "My First Project"), không dùng project Cloud đã tắt billing.',
+        "Gửi hơi nhanh, chạm giới hạn mỗi phút — chờ khoảng 1 phút rồi thử lại nhé (key vẫn tốt).",
         "rate-limit",
-        lastError.detail
-      );
-    }
-    if (g.includes("per minute") || g.includes("perminute")) {
-      throw new AiError(
-        "Chạm giới hạn số lượt mỗi phút — chờ khoảng 1 phút rồi thử lại nhé (key vẫn dùng được).",
-        "rate-limit",
-        lastError.detail
-      );
-    }
-    if (g.includes("per day") || g.includes("perday") || g.includes("daily")) {
-      throw new AiError(
-        "Key này đã hết hạn mức miễn phí trong ngày. Hạn mức reset khoảng 14–15h giờ Việt Nam. " +
-          "Muốn dùng ngay: tạo key trong một PROJECT Google khác (key mới cùng project vẫn chung hạn mức).",
-        "rate-limit",
-        lastError.detail
+        lastError.detail,
+        lastError.raw
       );
     }
     throw new AiError(
-      "Đang bị giới hạn tạm thời — chờ khoảng 1 phút rồi thử lại nhé.",
+      "Key này đã hết lượt chat miễn phí trong ngày (hạn mức tính theo PROJECT, không theo từng key). " +
+        "Vì thế tạo thêm key trong cùng project sẽ KHÔNG có thêm lượt. Cách xử lý: chờ tới ~14–15h " +
+        "(giờ VN) hạn mức tự reset, HOẶC tạo key bằng một TÀI KHOẢN Google khác (hoặc một project khác).",
       "rate-limit",
-      lastError.detail
+      lastError.detail,
+      lastError.raw
     );
   }
   throw lastError ?? new AiError("Không gọi được AI", "network");
