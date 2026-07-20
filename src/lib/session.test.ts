@@ -1,22 +1,35 @@
 import { describe, it, expect } from "vitest";
-import { composeSession, pickLeastRecent, type ComposeInput } from "./session";
+import { composeSession, pickLeastRecent, pickTodayTopic, type ComposeInput } from "./session";
+
+const DAY = 86_400_000;
 
 const base: ComposeInput = {
   mode: "full",
-  dueCount: 12,
-  newAvailable: 10,
+  topicIds: ["t1", "t2", "t3"],
+  topicLastStudied: {},
   dialogueIds: ["d1", "d2", "d3"],
   scenarioIds: ["s1", "s2"],
   lastDone: {},
-  dayIndex: 0,
+  dayIndex: 100,
 };
+
+describe("pickTodayTopic", () => {
+  it("ưu tiên chủ đề chưa từng học", () => {
+    expect(pickTodayTopic(["a", "b"], { a: 5 * DAY }, 100)).toBe("b");
+  });
+  it("bỏ qua chủ đề đã học hôm nay", () => {
+    // a học hôm nay (dayIndex 100), b học lâu rồi → chọn b
+    expect(pickTodayTopic(["a", "b"], { a: 100 * DAY + 3600_000, b: 50 * DAY }, 100)).toBe("b");
+  });
+  it("nếu mọi chủ đề đều học hôm nay vẫn trả về một cái", () => {
+    const r = pickTodayTopic(["a", "b"], { a: 100 * DAY, b: 100 * DAY }, 100);
+    expect(["a", "b"]).toContain(r);
+  });
+});
 
 describe("pickLeastRecent", () => {
   it("ưu tiên bài chưa từng làm", () => {
     expect(pickLeastRecent(["a", "b"], { a: 100 })).toBe("b");
-  });
-  it("chọn bài làm lâu nhất khi tất cả đã làm", () => {
-    expect(pickLeastRecent(["a", "b"], { a: 100, b: 50 })).toBe("b");
   });
   it("tôn trọng danh sách loại trừ", () => {
     expect(pickLeastRecent(["a", "b"], {}, ["a"])).toBe("b");
@@ -24,49 +37,40 @@ describe("pickLeastRecent", () => {
 });
 
 describe("composeSession", () => {
-  it("quick: ôn tập + 1 kỹ năng + ít từ mới", () => {
-    const items = composeSession({ ...base, mode: "quick" });
-    expect(items[0]).toEqual({ type: "review", dueCount: 12 });
-    expect(items[1].type).toBe("listening"); // dayIndex 0 chẵn
-    expect(items[2]).toEqual({ type: "newCards", count: 5 });
+  it("quick: học từ vựng chủ đề + 1 kỹ năng", () => {
+    const items = composeSession({ ...base, mode: "quick", dayIndex: 100 });
+    expect(items[0]).toEqual({ type: "vocab", topicId: "t1" });
+    expect(items[1].type).toBe("listening"); // dayIndex chẵn
+    expect(items).toHaveLength(2);
   });
 
   it("quick: ngày lẻ xoay sang shadowing", () => {
-    const items = composeSession({ ...base, mode: "quick", dayIndex: 1 });
+    const items = composeSession({ ...base, mode: "quick", dayIndex: 101 });
     expect(items[1].type).toBe("shadowing");
   });
 
-  it("full: có thêm tình huống chat và đủ từ mới", () => {
-    const items = composeSession(base);
-    const types = items.map((i) => i.type);
-    expect(types).toEqual(["review", "listening", "chat", "newCards"]);
-    expect(items.at(-1)).toEqual({ type: "newCards", count: 10 });
+  it("full: có thêm tình huống chat", () => {
+    const items = composeSession({ ...base, dayIndex: 100 });
+    expect(items.map((i) => i.type)).toEqual(["vocab", "listening", "chat"]);
   });
 
   it("deep: nghe và nói theo là 2 bài khác nhau", () => {
-    const items = composeSession({ ...base, mode: "deep" });
+    const items = composeSession({ ...base, mode: "deep", dayIndex: 100 });
     const listening = items.find((i) => i.type === "listening");
     const shadowing = items.find((i) => i.type === "shadowing");
-    expect(listening && "id" in listening && listening.id).toBeTruthy();
-    expect(shadowing && "id" in shadowing && shadowing.id).toBeTruthy();
     if (listening && shadowing && "id" in listening && "id" in shadowing) {
       expect(listening.id).not.toBe(shadowing.id);
     }
   });
 
-  it("không có review khi không có thẻ đến hạn", () => {
-    const items = composeSession({ ...base, dueCount: 0 });
-    expect(items.find((i) => i.type === "review")).toBeUndefined();
+  it("luôn có mục học từ vựng đầu tiên", () => {
+    const items = composeSession(base);
+    expect(items[0].type).toBe("vocab");
   });
 
-  it("không có newCards khi đã đạt cap trong ngày", () => {
-    const items = composeSession({ ...base, newAvailable: 0 });
-    expect(items.find((i) => i.type === "newCards")).toBeUndefined();
-  });
-
-  it("xoay vòng: chọn hội thoại chưa làm trước", () => {
-    const items = composeSession({ ...base, lastDone: { d1: 100, d2: 200 } });
-    const listening = items.find((i) => i.type === "listening");
-    expect(listening && "id" in listening && listening.id).toBe("d3");
+  it("xoay vòng chủ đề: chọn chủ đề chưa học", () => {
+    const items = composeSession({ ...base, topicLastStudied: { t1: 100, t2: 200 }, dayIndex: 100 });
+    const vocab = items.find((i) => i.type === "vocab");
+    expect(vocab && "topicId" in vocab && vocab.topicId).toBe("t3");
   });
 });

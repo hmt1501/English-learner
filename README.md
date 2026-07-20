@@ -11,7 +11,7 @@ Mở link trên điện thoại → menu trình duyệt → **"Thêm vào màn h
 | Module | Mô tả |
 |---|---|
 | 🏠 **Hôm nay** | Phiên học tự ghép theo quỹ thời gian (Nhanh 20' / Đủ 40' / Sâu 60') + chuỗi ngày 🔥 |
-| 🃏 **Từ vựng** | 120 cụm từ công sở, 8 chủ đề, flashcard lặp lại ngắt quãng (SM-2), 3 dạng bài |
+| 🃏 **Từ vựng** | 120 cụm từ công sở, 8 chủ đề. Học theo kiểu truyền thống: gõ nghĩa → hệ thống chấm → xem câu ví dụ có dịch; cuối buổi luyện dịch câu Việt → Anh |
 | 🎧 **Nghe** | 6 hội thoại công sở giọng neural — nghe không nhìn → câu hỏi → lời thoại + bản chậm |
 | 🎤 **Nói theo** | Shadowing từng câu: nghe mẫu → ghi âm → so sánh giọng của bạn với mẫu |
 | 💬 **Trả lời tin nhắn** | 8 tình huống chat kiểu Zalo — tự soạn câu trả lời, so với câu mẫu, tự chấm rubric |

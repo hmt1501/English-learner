@@ -1,11 +1,10 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import type { ChatScenario } from "@/lib/content-schema";
 import { getCard } from "@/lib/content";
-import { getCardStates, saveCardStates, logActivity } from "@/lib/storage";
-import { newCardState } from "@/lib/srs";
+import { logActivity } from "@/lib/storage";
 import { useProgress } from "@/stores/progress";
 import { PageHeader } from "@/components/ui/PageHeader";
 
@@ -20,22 +19,10 @@ export function ChatScenarioPlayer({ scenario }: { scenario: ChatScenario }) {
   const [submitted, setSubmitted] = useState(false);
   const [hintsShown, setHintsShown] = useState(0);
   const [rubricChecks, setRubricChecks] = useState<boolean[]>(scenario.rubricVi.map(() => false));
-  const [addedCards, setAddedCards] = useState(false);
   const [completed, setCompleted] = useState(false);
   const markDone = useProgress((s) => s.markDone);
 
   const usefulCards = scenario.srsCards.map(getCard).filter((c) => c !== undefined);
-
-  const addToSrs = useCallback(async () => {
-    if (addedCards) return;
-    const states = await getCardStates();
-    const now = Date.now();
-    for (const card of usefulCards) {
-      if (!states[card.id]) states[card.id] = newCardState(now);
-    }
-    await saveCardStates(states);
-    setAddedCards(true);
-  }, [addedCards, usefulCards]);
 
   async function complete() {
     if (completed) return;
@@ -166,14 +153,12 @@ export function ChatScenarioPlayer({ scenario }: { scenario: ChatScenario }) {
                   </li>
                 ))}
               </ul>
-              <button
-                type="button"
-                onClick={() => void addToSrs()}
-                disabled={addedCards}
-                className="w-full rounded-xl border border-primary py-2.5 text-sm font-semibold text-primary disabled:opacity-60 active:opacity-80"
+              <Link
+                href={`/vocab/study?topic=${scenario.topic}`}
+                className="block w-full rounded-xl border border-primary py-2.5 text-center text-sm font-semibold text-primary active:opacity-80"
               >
-                {addedCards ? "✓ Đã thêm vào bộ thẻ ôn tập" : "＋ Thêm vào bộ thẻ ôn tập"}
-              </button>
+                📚 Học các cụm này trong phần Từ vựng
+              </Link>
             </div>
           )}
 

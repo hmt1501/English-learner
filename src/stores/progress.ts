@@ -8,8 +8,8 @@ import { todayStr } from "@/lib/storage";
 type ProgressState = {
   name: string;
   mode: SessionMode;
-  newPerDay: number;
-  reviewsPerDay: number;
+  /** Số từ vựng học mỗi buổi cho một chủ đề */
+  wordsPerSession: number;
 
   streak: number;
   bestStreak: number;
@@ -18,19 +18,19 @@ type ProgressState = {
 
   /** Ngày của doneToday — khác hôm nay thì reset */
   today: string;
-  /** Khóa các mục đã xong hôm nay, ví dụ "review", "listening:meetings-01" */
+  /** Khóa các mục đã xong hôm nay, ví dụ "vocab:meetings", "listening:meetings-01" */
   doneToday: string[];
 
-  /** Đã xem hướng dẫn 4 nút ôn tập chưa */
-  seenSrsHelp: boolean;
+  /** Đã xem hướng dẫn cách học từ vựng chưa */
+  seenVocabHelp: boolean;
   /** API key Gemini cho tính năng chat AI (lưu trên máy này) */
   geminiKey: string;
 
-  setSeenSrsHelp: (seen: boolean) => void;
+  setSeenVocabHelp: (seen: boolean) => void;
   setGeminiKey: (key: string) => void;
   setName: (name: string) => void;
   setMode: (mode: SessionMode) => void;
-  setCaps: (newPerDay: number, reviewsPerDay: number) => void;
+  setWordsPerSession: (n: number) => void;
   /** Đánh dấu 1 mục trong phiên hôm nay đã xong */
   markDone: (key: string) => void;
   /** Ghi nhận hôm nay đã học đủ — cộng chuỗi ngày (idempotent theo ngày) */
@@ -50,21 +50,20 @@ export const useProgress = create<ProgressState>()(
     (set, get) => ({
       name: "",
       mode: "full",
-      newPerDay: 10,
-      reviewsPerDay: 60,
+      wordsPerSession: 10,
       streak: 0,
       bestStreak: 0,
       lastStreakDate: null,
       today: todayStr(),
       doneToday: [],
-      seenSrsHelp: false,
+      seenVocabHelp: false,
       geminiKey: "",
 
-      setSeenSrsHelp: (seenSrsHelp) => set({ seenSrsHelp }),
+      setSeenVocabHelp: (seenVocabHelp) => set({ seenVocabHelp }),
       setGeminiKey: (geminiKey) => set({ geminiKey }),
       setName: (name) => set({ name }),
       setMode: (mode) => set({ mode }),
-      setCaps: (newPerDay, reviewsPerDay) => set({ newPerDay, reviewsPerDay }),
+      setWordsPerSession: (wordsPerSession) => set({ wordsPerSession }),
 
       markDone: (key) => {
         get().rollDay();

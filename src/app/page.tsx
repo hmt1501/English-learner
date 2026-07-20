@@ -2,42 +2,31 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { allCards, dialogues, scenarios, getDialogue, getScenario } from "@/lib/content";
-import { getCardStates, countNewCardsToday, getLastDoneMap } from "@/lib/storage";
-import { isDue } from "@/lib/srs";
+import { decks, dialogues, scenarios, getDialogue, getScenario, getTopic } from "@/lib/content";
+import { getWordStats, getLastDoneMap, isMastered } from "@/lib/storage";
 import { composeSession, MODE_LABELS, type PlanItem, type SessionMode } from "@/lib/session";
 import { useProgress } from "@/stores/progress";
 import { useMounted } from "@/lib/useMounted";
 
+type PlanMeta = { icon: string; title: string; desc: string; href: string; minutes: string };
+
 function planKey(item: PlanItem): string {
-  switch (item.type) {
-    case "review":
-      return "review";
-    case "newCards":
-      return "newCards";
-    default:
-      return `${item.type}:${item.id}`;
-  }
+  return item.type === "vocab" ? `vocab:${item.topicId}` : `${item.type}:${item.id}`;
 }
 
-function planMeta(item: PlanItem): { icon: string; title: string; desc: string; href: string; minutes: string } {
+function planMeta(item: PlanItem, remainingWords: Record<string, number>): PlanMeta {
   switch (item.type) {
-    case "review":
+    case "vocab": {
+      const t = getTopic(item.topicId);
+      const left = remainingWords[item.topicId] ?? 0;
       return {
-        icon: "🃏",
-        title: "Ôn từ vựng",
-        desc: `${item.dueCount} thẻ đến hạn`,
-        href: "/vocab/review",
-        minutes: "~10 phút",
+        icon: t?.emoji ?? "🃏",
+        title: "Học từ vựng",
+        desc: `${t?.titleVi ?? ""}${left > 0 ? ` · còn ${left} từ chưa thuộc` : " · ôn lại"}`,
+        href: `/vocab/study?topic=${item.topicId}`,
+        minutes: "~15 phút",
       };
-    case "newCards":
-      return {
-        icon: "✨",
-        title: "Học cụm từ mới",
-        desc: `${item.count} thẻ mới`,
-        href: "/vocab/review",
-        minutes: "~5 phút",
-      };
+    }
     case "listening": {
       const d = getDialogue(item.id);
       return { icon: "🎧", title: "Nghe hội thoại", desc: d?.titleVi ?? "", href: `/listening/${item.id}`, minutes: "~10 phút" };
@@ -56,8 +45,8 @@ function planMeta(item: PlanItem): { icon: string; title: string; desc: string; 
 export default function HomePage() {
   const mounted = useMounted();
   const [plan, setPlan] = useState<PlanItem[] | null>(null);
-  const { name, mode, streak, newPerDay, doneToday, setMode, rollDay, recordStreak, lastStreakDate, today } =
-    useProgress();
+  const [remainingWords, setRemainingWords] = useState<Record<string, number>>({});
+  const { name, mode, streak, doneToday, setMode, rollDay, recordStreak, lastStreakDate, today } = useProgress();
 
   useEffect(() => {
     rollDay();
@@ -66,25 +55,27 @@ export default function HomePage() {
   useEffect(() => {
     if (!mounted) return;
     (async () => {
-      const states = await getCardStates();
-      const now = Date.now();
-      const dueCount = allCards.filter((c) => states[c.id] && isDue(states[c.id], now)).length;
-      const newDoneToday = await countNewCardsToday();
-      const newAvailable = Math.max(0, newPerDay - newDoneToday);
+      const stats = await getWordStats();
+      const topicLastStudied = await getLastDoneMap(["vocab"]);
       const lastDone = await getLastDoneMap(["listening", "shadowing", "chat"]);
+      const remaining: Record<string, number> = {};
+      for (const deck of decks) {
+        remaining[deck.id] = deck.cards.filter((c) => !isMastered(stats[c.id])).length;
+      }
+      setRemainingWords(remaining);
       setPlan(
         composeSession({
           mode,
-          dueCount,
-          newAvailable,
+          topicIds: decks.map((d) => d.topic),
+          topicLastStudied,
           dialogueIds: dialogues.map((d) => d.id),
           scenarioIds: scenarios.map((s) => s.id),
           lastDone,
-          dayIndex: Math.floor(now / 86_400_000),
+          dayIndex: Math.floor(Date.now() / 86_400_000),
         })
       );
     })();
-  }, [mounted, mode, newPerDay, doneToday]);
+  }, [mounted, mode, doneToday]);
 
   const allDone = useMemo(
     () => plan !== null && plan.length > 0 && plan.every((item) => doneToday.includes(planKey(item))),
@@ -138,18 +129,10 @@ export default function HomePage() {
       {/* Phiên học hôm nay */}
       {plan === null ? (
         <div className="rounded-2xl border border-border bg-card p-8 text-center text-muted">Đang tải...</div>
-      ) : plan.length === 0 ? (
-        <div className="rounded-2xl border border-border bg-card p-8 text-center">
-          <span className="text-4xl">🌱</span>
-          <p className="mt-2 font-semibold">Bắt đầu từ bộ thẻ từ vựng nhé!</p>
-          <Link href="/vocab" className="mt-3 inline-block rounded-full bg-primary px-6 py-2.5 font-semibold text-white">
-            Học thẻ đầu tiên
-          </Link>
-        </div>
       ) : (
         <div className="space-y-2.5">
           {plan.map((item) => {
-            const meta = planMeta(item);
+            const meta = planMeta(item, remainingWords);
             const done = doneToday.includes(planKey(item));
             return (
               <Link

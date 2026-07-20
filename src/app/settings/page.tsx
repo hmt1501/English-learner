@@ -8,7 +8,7 @@ import { useMounted } from "@/lib/useMounted";
 
 export default function SettingsPage() {
   const mounted = useMounted();
-  const { name, setName, newPerDay, reviewsPerDay, setCaps, streak, bestStreak, geminiKey, setGeminiKey } =
+  const { name, setName, wordsPerSession, setWordsPerSession, streak, bestStreak, geminiKey, setGeminiKey } =
     useProgress();
   const [totalActivities, setTotalActivities] = useState(0);
   const [message, setMessage] = useState("");
@@ -63,32 +63,19 @@ export default function SettingsPage() {
       </section>
 
       <section className="mb-4 rounded-2xl border border-border bg-card p-4">
-        <h2 className="mb-2 text-sm font-bold">Giới hạn học mỗi ngày</h2>
-        <div className="grid grid-cols-2 gap-3">
-          <div>
-            <label className="block text-xs text-muted">Thẻ mới / ngày</label>
-            <input
-              type="number"
-              min={0}
-              max={50}
-              value={newPerDay}
-              onChange={(e) => setCaps(Number(e.target.value) || 0, reviewsPerDay)}
-              className="mt-1 w-full rounded-xl border border-border bg-background p-2.5 text-sm outline-none focus:border-primary"
-            />
-          </div>
-          <div>
-            <label className="block text-xs text-muted">Ôn tối đa / ngày</label>
-            <input
-              type="number"
-              min={10}
-              max={300}
-              value={reviewsPerDay}
-              onChange={(e) => setCaps(newPerDay, Number(e.target.value) || 10)}
-              className="mt-1 w-full rounded-xl border border-border bg-background p-2.5 text-sm outline-none focus:border-primary"
-            />
-          </div>
-        </div>
-        <p className="mt-2 text-xs text-muted">Bận thì giảm thẻ mới xuống 5 — chuỗi ngày quan trọng hơn số lượng.</p>
+        <h2 className="mb-2 text-sm font-bold">Số từ mỗi buổi học</h2>
+        <input
+          type="number"
+          min={3}
+          max={20}
+          value={wordsPerSession}
+          onChange={(e) => setWordsPerSession(Math.min(20, Math.max(3, Number(e.target.value) || 3)))}
+          className="w-full rounded-xl border border-border bg-background p-2.5 text-sm outline-none focus:border-primary"
+        />
+        <p className="mt-2 text-xs text-muted">
+          Mỗi buổi học một chủ đề với số từ này (rồi kết thúc bằng phần dịch câu). Bận thì để 5 — chuỗi ngày
+          quan trọng hơn số lượng.
+        </p>
       </section>
 
       <section className="mb-4 rounded-2xl border border-border bg-card p-4">

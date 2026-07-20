@@ -1,24 +1,33 @@
 // Lưu trữ tiến độ học trên thiết bị (IndexedDB qua idb-keyval).
 // Chỉ gọi từ client component.
 import { get, set, createStore } from "idb-keyval";
-import type { CardState } from "./srs";
 
 const store = typeof indexedDB !== "undefined" ? createStore("tacs-db", "tacs-store") : undefined;
 
-const KEY_CARD_STATES = "cardStates";
+const KEY_WORD_STATS = "wordStats";
 const KEY_ACTIVITY_LOG = "activityLog";
 
-export type CardStates = Record<string, CardState>;
+/** Số lần trả lời đúng để coi một từ là "đã thuộc" */
+export const MASTER_THRESHOLD = 2;
 
-export type ActivityType = "review" | "listening" | "shadowing" | "chat" | "newCards";
+export type WordStat = {
+  correct: number;
+  wrong: number;
+  /** Thời điểm học gần nhất (epoch ms) */
+  lastSeen: number;
+};
+
+export type WordStats = Record<string, WordStat>;
+
+export type ActivityType = "vocab" | "listening" | "shadowing" | "chat";
 
 export type ActivityEntry = {
   /** YYYY-MM-DD theo giờ địa phương */
   date: string;
   type: ActivityType;
-  /** id hội thoại / tình huống nếu có */
+  /** id chủ đề / hội thoại / tình huống nếu có */
   refId?: string;
-  /** số thẻ đã ôn với type=review/newCards */
+  /** số từ đúng với type=vocab */
   count?: number;
   at: number;
 };
@@ -30,18 +39,26 @@ export function todayStr(d = new Date()): string {
   return `${y}-${m}-${day}`;
 }
 
-export async function getCardStates(): Promise<CardStates> {
-  return (await get(KEY_CARD_STATES, store)) ?? {};
+export async function getWordStats(): Promise<WordStats> {
+  return (await get(KEY_WORD_STATS, store)) ?? {};
 }
 
-export async function saveCardStates(states: CardStates): Promise<void> {
-  await set(KEY_CARD_STATES, states, store);
+export async function saveWordStats(stats: WordStats): Promise<void> {
+  await set(KEY_WORD_STATS, stats, store);
 }
 
-export async function updateCardState(id: string, state: CardState): Promise<void> {
-  const states = await getCardStates();
-  states[id] = state;
-  await saveCardStates(states);
+/** Cập nhật thuần: trả về stat mới sau một lần trả lời (dùng được cả khi gộp lô) */
+export function applyResult(stat: WordStat | undefined, correct: boolean, now: number): WordStat {
+  const cur = stat ?? { correct: 0, wrong: 0, lastSeen: 0 };
+  return {
+    correct: cur.correct + (correct ? 1 : 0),
+    wrong: cur.wrong + (correct ? 0 : 1),
+    lastSeen: now,
+  };
+}
+
+export function isMastered(stat: WordStat | undefined): boolean {
+  return (stat?.correct ?? 0) >= MASTER_THRESHOLD;
 }
 
 export async function getActivityLog(): Promise<ActivityEntry[]> {
@@ -54,7 +71,7 @@ export async function logActivity(entry: Omit<ActivityEntry, "date" | "at">): Pr
   await set(KEY_ACTIVITY_LOG, log, store);
 }
 
-/** Lần gần nhất hoàn thành mỗi hội thoại/tình huống — dùng để xoay vòng trong daily plan */
+/** Lần gần nhất hoàn thành mỗi chủ đề/hội thoại/tình huống — dùng để xoay vòng trong daily plan */
 export async function getLastDoneMap(types: ActivityType[]): Promise<Record<string, number>> {
   const log = await getActivityLog();
   const map: Record<string, number> = {};
@@ -66,21 +83,12 @@ export async function getLastDoneMap(types: ActivityType[]): Promise<Record<stri
   return map;
 }
 
-/** Số thẻ mới đã học hôm nay (để áp cap từ mới/ngày) */
-export async function countNewCardsToday(): Promise<number> {
-  const log = await getActivityLog();
-  const today = todayStr();
-  return log
-    .filter((e) => e.date === today && e.type === "newCards")
-    .reduce((sum, e) => sum + (e.count ?? 0), 0);
-}
-
 // ---- Sao lưu / khôi phục ----
 
 export type BackupData = {
-  version: 1;
+  version: 1 | 2;
   exportedAt: string;
-  cardStates: CardStates;
+  wordStats?: WordStats;
   activityLog: ActivityEntry[];
   /** localStorage của zustand (streak, cài đặt) */
   progressStore: string | null;
@@ -88,17 +96,16 @@ export type BackupData = {
 
 export async function exportBackup(): Promise<BackupData> {
   return {
-    version: 1,
+    version: 2,
     exportedAt: new Date().toISOString(),
-    cardStates: await getCardStates(),
+    wordStats: await getWordStats(),
     activityLog: await getActivityLog(),
     progressStore: typeof localStorage !== "undefined" ? localStorage.getItem("tacs-progress") : null,
   };
 }
 
 export async function importBackup(data: BackupData): Promise<void> {
-  if (data.version !== 1) throw new Error("Phiên bản file sao lưu không được hỗ trợ");
-  await saveCardStates(data.cardStates ?? {});
+  await saveWordStats(data.wordStats ?? {});
   await set(KEY_ACTIVITY_LOG, data.activityLog ?? [], store);
   if (data.progressStore && typeof localStorage !== "undefined") {
     localStorage.setItem("tacs-progress", data.progressStore);
