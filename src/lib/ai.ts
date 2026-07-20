@@ -166,19 +166,37 @@ export async function chatWithCoach(opts: {
     }
   }
 
-  // Tất cả model đều thất bại
+  // Tất cả model đều thất bại. Phân loại 429 theo thông báo gốc của Google —
+  // lưu ý: mọi thông báo 429 đều chứa chữ "quota", nên phải nhận diện cụ thể
+  // "per minute" / "per day" / "limit: 0" chứ không được bắt chữ "quota" chung chung.
   if (lastError?.kind === "rate-limit") {
     const g = (lastError.detail ?? "").toLowerCase();
-    if (g.includes("per day") || g.includes("daily") || g.includes("quota")) {
+    if (g.includes("limit: 0") || g.includes("limit value: 0") || g.includes("not available in your country")) {
       throw new AiError(
-        "Key này đã hết hạn mức miễn phí trong ngày (hoặc project chưa bật gói miễn phí). " +
-          "Hãy thử lại vào ngày mai, hoặc tạo key mới trong một dự án Google khác.",
+        "Project của key này chưa được cấp gói miễn phí (hạn mức = 0). " +
+          "Vào aistudio.google.com/apikey, tạo key trong project mặc định của AI Studio " +
+          '(ví dụ "My First Project"), không dùng project Cloud đã tắt billing.',
+        "rate-limit",
+        lastError.detail
+      );
+    }
+    if (g.includes("per minute") || g.includes("perminute")) {
+      throw new AiError(
+        "Chạm giới hạn số lượt mỗi phút — chờ khoảng 1 phút rồi thử lại nhé (key vẫn dùng được).",
+        "rate-limit",
+        lastError.detail
+      );
+    }
+    if (g.includes("per day") || g.includes("perday") || g.includes("daily")) {
+      throw new AiError(
+        "Key này đã hết hạn mức miễn phí trong ngày. Hạn mức reset khoảng 14–15h giờ Việt Nam. " +
+          "Muốn dùng ngay: tạo key trong một PROJECT Google khác (key mới cùng project vẫn chung hạn mức).",
         "rate-limit",
         lastError.detail
       );
     }
     throw new AiError(
-      "Đang gửi hơi nhanh — chờ khoảng 30 giây rồi thử lại nhé.",
+      "Đang bị giới hạn tạm thời — chờ khoảng 1 phút rồi thử lại nhé.",
       "rate-limit",
       lastError.detail
     );
