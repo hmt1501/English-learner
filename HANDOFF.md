@@ -44,7 +44,7 @@ src/
   app/
     page.tsx                 # "Hôm nay": daily plan + streak (composeSession + ghim mục đã làm)
     vocab/page.tsx           # danh sách chủ đề + gợi ý hôm nay + thanh tiến độ
-    vocab/study/page.tsx     # ⭐ học từ vựng 3 bước: preview → learn(gõ nghĩa) → translate(dịch câu)
+    vocab/study/page.tsx     # ⭐ học từ vựng: chọn 1 trong 3 chế độ (word / en2vi / vi2en), gõ đáp án + chấm
     listening/page.tsx, listening/[id]/page.tsx    # Nghe (DialoguePlayer)
     speaking/[id]/page.tsx   # Nói theo (ShadowingPlayer)
     chat/page.tsx, chat/[id]/page.tsx              # Trả lời tin nhắn (ChatScenarioPlayer)
@@ -72,7 +72,7 @@ src/
 | Tính năng | File chính | Ghi chú |
 |---|---|---|
 | Hôm nay (daily plan + streak) | `app/page.tsx`, `lib/session.ts` | `composeSession()` luôn mở đầu bằng mục vocab (chủ đề gợi ý hôm nay); các mục đã làm trong ngày được **ghim** để hiện ✅ và ổn định kế hoạch. Streak cộng khi xong hết `todayPlanKeys`. |
-| Từ vựng (3 bước) | `app/vocab/study/page.tsx`, `lib/check.ts` | ① Làm quen (xem từ+nghĩa+ví dụ) → ② Gõ nghĩa (chấm bằng `checkMeaning`) → ③ Dịch câu Việt→Anh (`checkTranslation`). Chấm offline, thoáng tay, luôn hiện đáp án + có nút tự chấm lại. **Lưu `WordStats` sau mỗi câu**; ghi công ngày khi xong bước ②. |
+| Từ vựng (3 chế độ) | `app/vocab/study/page.tsx`, `lib/check.ts` | Vào `/vocab/study?topic=x` → màn chọn chế độ: **word** (làm quen từ rồi gõ nghĩa tiếng Việt, chấm `checkMeaning`), **en2vi** (dịch câu ví dụ Anh→Việt, chấm `checkTranslationVi`), **vi2en** (dịch câu Việt→Anh, chấm `checkTranslation`). Chấm offline, thoáng tay, luôn hiện đáp án + có nút tự chấm lại. **Lưu `WordStats` sau mỗi câu** (cả 3 chế độ); ghi công ngày + markDone khi hoàn tất buổi ở bất kỳ chế độ nào. |
 | Nghe | `components/audio/DialoguePlayer.tsx` | Phát cả bài, câu hỏi + lời thoại xem được từ đầu; hoàn thành khi trả lời hết câu hỏi. |
 | Nói theo | `components/audio/ShadowingPlayer.tsx` | Ghi âm từng câu (MediaRecorder) → so với mẫu → tự chấm. |
 | Trả lời tin nhắn | `components/chat/ChatScenarioPlayer.tsx` | Gõ câu trả lời → so câu mẫu + rubric tự chấm. |
@@ -82,7 +82,7 @@ src/
 ## 5. Mô hình dữ liệu (lưu trên máy)
 
 - **IndexedDB (`storage.ts`, store `tacs-db`/`tacs-store`):**
-  - `wordStats: Record<cardId, {correct, wrong, lastSeen}>` — "thuộc" khi `correct >= MASTER_THRESHOLD (2)`.
+  - `wordStats: Record<key, {correct, wrong, lastSeen}>` — key theo chế độ học (`lib/vocab-modes.ts` `statKey()`): chế độ `word` dùng `cardId` trần (tương thích dữ liệu cũ), dịch câu dùng `en2vi:<cardId>` / `vi2en:<cardId>`. "Thuộc" khi `correct >= MASTER_THRESHOLD (2)`; tiến độ hiển thị ở danh sách chủ đề/màn chọn chế độ = số từ `correct >= 1` theo từng chế độ.
   - `activityLog: ActivityEntry[]` — `{date(YYYY-MM-DD local), type: "vocab"|"listening"|"shadowing"|"chat", refId?, count?, at}`.
 - **localStorage (`progress.ts`, key `tacs-progress`):** name, mode(quick/full/deep), wordsPerSession, streak/bestStreak/lastStreakDate, today, doneToday[], todayPlanKeys[], seenVocabHelp, geminiKey.
 - **Sao lưu** (`exportBackup`/`importBackup`): version 2 = `{wordStats, activityLog, progressStore}`. `importBackup` bỏ qua trường sai kiểu.
@@ -97,7 +97,7 @@ src/
 
 ## 7. Hành vi CỐ Ý (không phải bug)
 
-- Thoát giữa bước ② "Học nghĩa" khi chưa xong hết từ ⇒ **số từ đã học vẫn lưu**, nhưng ngày đó **chưa** được tính "đã học từ vựng" (chưa ghi activity/markDone). Chỉ ghi công khi hoàn tất bước ②.
+- Thoát giữa phần kiểm tra khi chưa trả lời hết ⇒ **số từ đã học vẫn lưu** (`WordStats` lưu sau mỗi câu), nhưng ngày đó **chưa** được tính "đã học từ vựng" (chưa ghi activity/markDone). Chỉ ghi công khi hoàn tất buổi.
 - **Chat với AI không nằm trong daily plan/streak** — là phần luyện thêm (log `type:"chat", refId:"ai"`, không markDone mục chat của kế hoạch).
 - Chấm nghĩa/dịch **cố ý thoáng** (bỏ dấu, theo tỉ lệ từ cốt lõi) và luôn có nút tự chấm lại — không nhằm đúng từng chữ.
 - Đổi mô hình dữ liệu (SRS → WordStats) khiến tiến độ từ vựng cũ trên máy bắt đầu lại; các phần khác không ảnh hưởng.
@@ -118,7 +118,7 @@ src/
 ## 10. Gợi ý sửa lỗi thường gặp
 
 - Lỗi tính streak/kế hoạch → xem `app/page.tsx` (ghim mục đã làm + `setTodayPlan`) và `stores/progress.ts` (`markDone`/`recordStreak`/`rollDay`).
-- Chấm bài quá chặt/lỏng → chỉnh ngưỡng trong `lib/check.ts` (`checkMeaning` 0.5/0.3, `checkTranslation` 0.8/0.5) và chạy `npm test`.
-- Đổi số bước/độ dài buổi học → `app/vocab/study/page.tsx` (`TRANSLATE_COUNT`, `wordsPerSession`).
+- Chấm bài quá chặt/lỏng → chỉnh ngưỡng trong `lib/check.ts` (`checkMeaning` 0.5/0.3, `checkTranslationVi` 0.6/0.35, `checkTranslation` 0.8/0.5) và chạy `npm test`.
+- Đổi độ dài buổi học → cài đặt `wordsPerSession` (dùng chung cho cả 3 chế độ trong `app/vocab/study/page.tsx`).
 - AI chat lỗi → `lib/ai.ts` (danh sách `MODELS`, ánh xạ mã lỗi, prompt roleplay).
 - Đổi caching/offline → `public/sw.js` (nhớ tăng `VERSION` khi đổi hành vi cache).

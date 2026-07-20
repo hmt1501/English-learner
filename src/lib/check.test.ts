@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { checkMeaning, checkTranslation, normalize } from "./check";
+import { checkMeaning, checkTranslation, checkTranslationVi, normalize } from "./check";
 
 describe("normalize", () => {
   it("bỏ dấu câu và gộp khoảng trắng", () => {
@@ -22,6 +22,27 @@ describe("checkMeaning", () => {
   });
   it("rỗng → sai", () => {
     expect(checkMeaning("", "bất kỳ")).toBe("wrong");
+  });
+});
+
+describe("checkTranslationVi", () => {
+  it("khớp chính xác không phân biệt dấu câu", () => {
+    expect(checkTranslationVi("Tôi sẽ trả lời bạn sớm", "Tôi sẽ trả lời bạn sớm.")).toBe("correct");
+  });
+  it("bỏ dấu vẫn đúng", () => {
+    expect(checkTranslationVi("toi se tra loi ban som", "Tôi sẽ trả lời bạn sớm.")).toBe("correct");
+  });
+  it("đủ ý cốt lõi dù thiếu từ phụ", () => {
+    expect(checkTranslationVi("sẽ trả lời bạn sớm", "Tôi sẽ trả lời bạn sớm.")).toBe("correct");
+  });
+  it("chỉ được một phần ý → gần đúng", () => {
+    expect(checkTranslationVi("tôi sẽ trả lời sớm", "Tôi sẽ trả lời bạn sớm nhất có thể.")).toBe("close");
+  });
+  it("sai hoàn toàn → wrong", () => {
+    expect(checkTranslationVi("xin chào buổi sáng", "Hệ thống đang gặp sự cố.")).toBe("wrong");
+  });
+  it("rỗng → sai", () => {
+    expect(checkTranslationVi("", "bất kỳ")).toBe("wrong");
   });
 });
 

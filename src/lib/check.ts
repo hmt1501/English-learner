@@ -56,7 +56,19 @@ export function checkMeaning(user: string, expected: string): Verdict {
   return cov >= 0.5 ? "correct" : cov >= 0.3 ? "close" : "wrong";
 }
 
-/** Chấm phần DỊCH TIẾNG ANH của một câu tiếng Việt */
+/** Chấm phần DỊCH TIẾNG VIỆT của một câu tiếng Anh (Anh → Việt) */
+export function checkTranslationVi(user: string, expected: string): Verdict {
+  const nu = normalize(user);
+  const ne = normalize(expected);
+  if (!nu) return "wrong";
+  if (nu === ne || stripAccents(nu) === stripAccents(ne)) return "correct";
+  // Tiếng Việt có nhiều cách diễn đạt cùng một ý — chấm theo tỉ lệ từ cốt lõi,
+  // ngưỡng nằm giữa chấm nghĩa từ (0.5/0.3) và chấm dịch sang Anh (0.8/0.5).
+  const cov = coverage(user, expected, VI_STOP, true);
+  return cov >= 0.6 ? "correct" : cov >= 0.35 ? "close" : "wrong";
+}
+
+/** Chấm phần DỊCH TIẾNG ANH của một câu tiếng Việt (Việt → Anh) */
 export function checkTranslation(user: string, expected: string): Verdict {
   const nu = normalize(user);
   const ne = normalize(expected);

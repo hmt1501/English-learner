@@ -3,8 +3,9 @@
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { decks, getTopic } from "@/lib/content";
-import { getWordStats, getLastDoneMap, isMastered, type WordStats } from "@/lib/storage";
+import { getWordStats, getLastDoneMap, type WordStats } from "@/lib/storage";
 import { pickTodayTopic } from "@/lib/session";
+import { MODE_INFO, VOCAB_MODES, statKey, type VocabMode } from "@/lib/vocab-modes";
 import { PageHeader } from "@/components/ui/PageHeader";
 
 type Info = {
@@ -25,24 +26,24 @@ export default function VocabPage() {
     })();
   }, []);
 
+  // Số từ đã trả lời đúng (≥1 lần) theo từng chế độ học của mỗi chủ đề
   const perDeck = useMemo(() => {
-    const map: Record<string, { learned: number; mastered: number; total: number }> = {};
+    const map: Record<string, Record<VocabMode, number>> = {};
     for (const deck of decks) {
-      let learned = 0;
-      let mastered = 0;
+      const counts: Record<VocabMode, number> = { word: 0, en2vi: 0, vi2en: 0 };
       for (const c of deck.cards) {
-        const s = info?.stats[c.id];
-        if (s && (s.correct > 0 || s.wrong > 0)) learned++;
-        if (isMastered(s)) mastered++;
+        for (const m of VOCAB_MODES) {
+          if ((info?.stats[statKey(m, c.id)]?.correct ?? 0) > 0) counts[m]++;
+        }
       }
-      map[deck.id] = { learned, mastered, total: deck.cards.length };
+      map[deck.id] = counts;
     }
     return map;
   }, [info]);
 
   return (
     <main>
-      <PageHeader title="Từ vựng" subtitle="Học theo chủ đề — gõ nghĩa, xem câu ví dụ, rồi luyện dịch câu" />
+      <PageHeader title="Từ vựng" subtitle="Chọn chủ đề, rồi chọn cách học: từ vựng, dịch câu Anh–Việt hoặc Việt–Anh" />
 
       {info?.todayTopic && (
         <Link
@@ -58,12 +59,15 @@ export default function VocabPage() {
         </Link>
       )}
 
-      <h2 className="mb-2 text-sm font-semibold uppercase tracking-wide text-muted">Tất cả chủ đề</h2>
+      <h2 className="mb-1 text-sm font-semibold uppercase tracking-wide text-muted">Tất cả chủ đề</h2>
+      <p className="mb-2 text-xs text-muted">
+        Tiến độ = số từ đã trả lời đúng theo từng cách học: {VOCAB_MODES.map((m) => `${MODE_INFO[m].emoji} ${MODE_INFO[m].title}`).join(" · ")}
+      </p>
       <div className="space-y-2">
         {decks.map((deck) => {
           const topic = getTopic(deck.topic);
-          const stats = perDeck[deck.id];
-          const pct = stats ? Math.round((stats.mastered / stats.total) * 100) : 0;
+          const counts = perDeck[deck.id];
+          const total = deck.cards.length;
           return (
             <Link
               key={deck.id}
@@ -73,13 +77,12 @@ export default function VocabPage() {
               <span className="text-2xl">{topic?.emoji}</span>
               <div className="flex-1">
                 <div className="font-semibold">{deck.titleVi}</div>
-                <div className="mt-1 flex items-center gap-2">
-                  <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-border">
-                    <div className="h-full rounded-full bg-accent" style={{ width: `${pct}%` }} />
-                  </div>
-                  <span className="text-xs text-muted">
-                    {stats?.mastered ?? 0}/{stats?.total ?? deck.cards.length} thuộc
-                  </span>
+                <div className="mt-1 flex items-center gap-3 text-xs text-muted">
+                  {VOCAB_MODES.map((m) => (
+                    <span key={m} title={MODE_INFO[m].title} className={counts?.[m] ? "font-semibold text-accent" : ""}>
+                      {MODE_INFO[m].emoji} {counts?.[m] ?? 0}/{total}
+                    </span>
+                  ))}
                 </div>
               </div>
               <span className="text-muted">›</span>
