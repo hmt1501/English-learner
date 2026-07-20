@@ -15,6 +15,7 @@ Mở link trên điện thoại → menu trình duyệt → **"Thêm vào màn h
 | 🎧 **Nghe** | 6 hội thoại công sở giọng neural — nghe không nhìn → câu hỏi → lời thoại + bản chậm |
 | 🎤 **Nói theo** | Shadowing từng câu: nghe mẫu → ghi âm → so sánh giọng của bạn với mẫu |
 | 💬 **Trả lời tin nhắn** | 8 tình huống chat kiểu Zalo — tự soạn câu trả lời, so với câu mẫu, tự chấm rubric |
+| 🤖 **Chat với AI** | Trò chuyện thật với "đồng nghiệp ảo" (Google Gemini miễn phí) — 6 tình huống công sở, AI trả lời + hỏi tiếp + nhận xét tiếng Việt từng câu. Cần API key miễn phí (hướng dẫn trong app) |
 | ⚙️ **Cài đặt** | Tên, giới hạn thẻ/ngày, sao lưu & khôi phục dữ liệu (file JSON) |
 
 Dữ liệu học lưu **ngay trên thiết bị** (IndexedDB) — không cần tài khoản, không server. Hoạt động offline sau lần mở đầu tiên (PWA).
