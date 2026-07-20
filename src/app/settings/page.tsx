@@ -8,7 +8,8 @@ import { useMounted } from "@/lib/useMounted";
 
 export default function SettingsPage() {
   const mounted = useMounted();
-  const { name, setName, newPerDay, reviewsPerDay, setCaps, streak, bestStreak } = useProgress();
+  const { name, setName, newPerDay, reviewsPerDay, setCaps, streak, bestStreak, geminiKey, setGeminiKey } =
+    useProgress();
   const [totalActivities, setTotalActivities] = useState(0);
   const [message, setMessage] = useState("");
   const fileRef = useRef<HTMLInputElement>(null);
@@ -88,6 +89,20 @@ export default function SettingsPage() {
           </div>
         </div>
         <p className="mt-2 text-xs text-muted">Bận thì giảm thẻ mới xuống 5 — chuỗi ngày quan trọng hơn số lượng.</p>
+      </section>
+
+      <section className="mb-4 rounded-2xl border border-border bg-card p-4">
+        <h2 className="mb-2 text-sm font-bold">🤖 AI chat (Google Gemini)</h2>
+        <label className="block text-xs text-muted">API key (miễn phí — tạo tại aistudio.google.com/apikey)</label>
+        <input
+          value={geminiKey}
+          onChange={(e) => setGeminiKey(e.target.value.trim())}
+          placeholder="AIza..."
+          className="mt-1 w-full rounded-xl border border-border bg-background p-2.5 font-mono text-sm outline-none focus:border-primary"
+        />
+        <p className="mt-2 text-xs text-muted">
+          Key chỉ lưu trên máy này. Xoá key sẽ tắt tính năng chat AI; các tính năng khác không bị ảnh hưởng.
+        </p>
       </section>
 
       <section className="mb-4 rounded-2xl border border-border bg-card p-4">

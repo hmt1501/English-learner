@@ -16,6 +16,20 @@ export default function ChatListPage() {
   return (
     <main>
       <PageHeader title="Trả lời tin nhắn" subtitle="Tình huống thật — bạn tự soạn câu trả lời" />
+
+      <Link
+        href="/chat/ai"
+        className="mb-5 flex items-center gap-3 rounded-2xl bg-primary p-4 text-white shadow-sm active:opacity-90"
+      >
+        <span className="text-3xl">🤖</span>
+        <div className="flex-1">
+          <div className="text-lg font-bold">Chat với AI</div>
+          <div className="text-sm opacity-90">Trò chuyện thật với đồng nghiệp ảo — AI nhận xét từng câu của bạn</div>
+        </div>
+        <span className="text-2xl">›</span>
+      </Link>
+
+      <h2 className="mb-2 text-sm font-semibold uppercase tracking-wide text-muted">Tình huống có sẵn</h2>
       <div className="space-y-2">
         {scenarios.map((s) => {
           const topic = getTopic(s.topic);

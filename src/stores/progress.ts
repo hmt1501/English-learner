@@ -21,6 +21,13 @@ type ProgressState = {
   /** Khóa các mục đã xong hôm nay, ví dụ "review", "listening:meetings-01" */
   doneToday: string[];
 
+  /** Đã xem hướng dẫn 4 nút ôn tập chưa */
+  seenSrsHelp: boolean;
+  /** API key Gemini cho tính năng chat AI (lưu trên máy này) */
+  geminiKey: string;
+
+  setSeenSrsHelp: (seen: boolean) => void;
+  setGeminiKey: (key: string) => void;
   setName: (name: string) => void;
   setMode: (mode: SessionMode) => void;
   setCaps: (newPerDay: number, reviewsPerDay: number) => void;
@@ -50,7 +57,11 @@ export const useProgress = create<ProgressState>()(
       lastStreakDate: null,
       today: todayStr(),
       doneToday: [],
+      seenSrsHelp: false,
+      geminiKey: "",
 
+      setSeenSrsHelp: (seenSrsHelp) => set({ seenSrsHelp }),
+      setGeminiKey: (geminiKey) => set({ geminiKey }),
       setName: (name) => set({ name }),
       setMode: (mode) => set({ mode }),
       setCaps: (newPerDay, reviewsPerDay) => set({ newPerDay, reviewsPerDay }),
