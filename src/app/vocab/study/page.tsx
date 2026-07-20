@@ -19,7 +19,13 @@ import { useProgress } from "@/stores/progress";
 
 const TRANSLATE_COUNT = 5;
 
-type Phase = "learn" | "translate" | "done";
+type Phase = "preview" | "learn" | "translate" | "done";
+
+const PHASE_LABEL: Record<Exclude<Phase, "done">, string> = {
+  preview: "① Làm quen từ",
+  learn: "② Học nghĩa",
+  translate: "③ Dịch câu",
+};
 
 function verdictClass(v: Verdict): string {
   return v === "correct"
@@ -32,11 +38,11 @@ function verdictClass(v: Verdict): string {
 function VocabHelp({ onClose }: { onClose: () => void }) {
   return (
     <div className="mb-3 rounded-2xl bg-primary-soft p-4 text-sm text-primary">
-      <p className="font-bold">💡 Cách học</p>
+      <p className="font-bold">💡 Buổi học gồm 3 bước</p>
       <ol className="mt-1.5 list-decimal space-y-1 pl-5">
-        <li>Nhìn cụm từ tiếng Anh → <b>tự gõ nghĩa tiếng Việt</b> ra.</li>
-        <li>Hệ thống chấm và <b>hiện đáp án + câu ví dụ có dịch</b> để bạn hiểu rõ.</li>
-        <li>Cuối buổi: hệ thống đưa <b>câu tiếng Việt</b>, bạn <b>dịch sang tiếng Anh</b>.</li>
+        <li><b>Làm quen:</b> xem từ + nghĩa + câu ví dụ có dịch để nhớ trước.</li>
+        <li><b>Học nghĩa:</b> nhìn cụm từ, tự gõ nghĩa tiếng Việt, hệ thống chấm.</li>
+        <li><b>Dịch câu:</b> hệ thống đưa câu tiếng Việt, bạn dịch sang tiếng Anh.</li>
       </ol>
       <p className="mt-1.5">Chấm khá thoáng (không cần đúng từng chữ) — cứ mạnh dạn gõ, sai cũng học được!</p>
       <button
@@ -57,23 +63,32 @@ function StudySession() {
   const { wordsPerSession, markDone, seenVocabHelp, setSeenVocabHelp } = useProgress();
 
   const statsRef = useRef<WordStats>({});
+  const committed = useRef(false);
   const [ready, setReady] = useState(false);
   const [showHelp, setShowHelp] = useState(false);
 
-  const [phase, setPhase] = useState<Phase>("learn");
+  const [phase, setPhase] = useState<Phase>("preview");
+  const [words, setWords] = useState<string[]>([]); // toàn bộ từ của buổi học
+
+  // Bước ① làm quen
+  const [pIndex, setPIndex] = useState(0);
+  const [pRevealed, setPRevealed] = useState(false);
+
+  // Bước ② học nghĩa
   const [learnQueue, setLearnQueue] = useState<string[]>([]);
   const learnVerdicts = useRef<Record<string, Verdict>>({});
+
+  // Bước ③ dịch câu
   const [translateWords, setTranslateWords] = useState<string[]>([]);
   const [tIndex, setTIndex] = useState(0);
 
-  // Ô nhập + kết quả cho câu hiện tại
+  // Ô nhập + kết quả cho câu hiện tại (dùng chung cho bước ② và ③)
   const [answer, setAnswer] = useState("");
   const [result, setResult] = useState<Verdict | null>(null);
 
   const [meaningCorrect, setMeaningCorrect] = useState(0);
   const [meaningTotal, setMeaningTotal] = useState(0);
   const [transCorrect, setTransCorrect] = useState(0);
-  const doneLogged = useRef(false);
 
   useEffect(() => {
     (async () => {
@@ -87,65 +102,58 @@ function StudySession() {
         if (ma !== mb) return ma - mb;
         return (stats[a.id]?.lastSeen ?? 0) - (stats[b.id]?.lastSeen ?? 0);
       });
-      setLearnQueue(sorted.slice(0, wordsPerSession).map((c) => c.id));
+      const chosen = sorted.slice(0, wordsPerSession).map((c) => c.id);
+      setWords(chosen);
+      setLearnQueue(chosen);
       setReady(true);
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [topicId]);
 
-  const currentCard: VocabCard | undefined = useMemo(() => {
-    if (!deck) return undefined;
-    const id = phase === "learn" ? learnQueue[0] : translateWords[tIndex];
-    return deck.cards.find((c) => c.id === id);
-  }, [deck, phase, learnQueue, translateWords, tIndex]);
-
-  const submit = useCallback(() => {
-    if (!currentCard || result !== null) return;
-    const v =
-      phase === "learn"
-        ? checkMeaning(answer, currentCard.meaningVi)
-        : checkTranslation(answer, currentCard.example);
-    setResult(v);
-    if (phase === "learn") {
-      void playVocab(currentCard.audio, currentCard.chunk);
-      learnVerdicts.current[currentCard.id] = v;
-      statsRef.current[currentCard.id] = applyResult(statsRef.current[currentCard.id], v !== "wrong", Date.now());
-      setMeaningTotal((n) => n + 1);
-      if (v !== "wrong") setMeaningCorrect((n) => n + 1);
-    } else if (v !== "wrong") {
-      setTransCorrect((n) => n + 1);
-    }
-  }, [currentCard, result, phase, answer]);
-
-  /** Ghi đè kết quả tự chấm (khi hệ thống chấm chưa chuẩn) */
-  const override = useCallback(
-    (correct: boolean) => {
-      if (!currentCard || result === null) return;
-      const wasCorrect = result !== "wrong";
-      if (wasCorrect === correct) return;
-      setResult(correct ? "correct" : "wrong");
-      if (phase === "learn") {
-        statsRef.current[currentCard.id] = applyResult(
-          // gỡ kết quả cũ rồi áp lại
-          {
-            correct: (statsRef.current[currentCard.id]?.correct ?? 0) - (wasCorrect ? 1 : 0),
-            wrong: (statsRef.current[currentCard.id]?.wrong ?? 0) - (wasCorrect ? 0 : 1),
-            lastSeen: 0,
-          },
-          correct,
-          Date.now()
-        );
-        learnVerdicts.current[currentCard.id] = correct ? "correct" : "wrong";
-        setMeaningCorrect((n) => n + (correct ? 1 : -1));
-      } else {
-        setTransCorrect((n) => n + (correct ? 1 : -1));
-      }
-    },
-    [currentCard, result, phase]
+  const cardById = useCallback(
+    (id: string | undefined): VocabCard | undefined => (id ? deck?.cards.find((c) => c.id === id) : undefined),
+    [deck]
   );
 
+  const previewCard = useMemo(() => cardById(words[pIndex]), [cardById, words, pIndex]);
+  const currentCard = useMemo(
+    () => cardById(phase === "learn" ? learnQueue[0] : translateWords[tIndex]),
+    [cardById, phase, learnQueue, translateWords, tIndex]
+  );
+
+  /** Lưu ngay tiến độ từ vựng để không mất khi thoát giữa chừng */
+  const persistStats = useCallback(async () => {
+    await saveWordStats(statsRef.current);
+  }, []);
+
+  /** Ghi nhận buổi học vào lịch sử + đánh dấu xong ở tab Hôm nay (chạy 1 lần) */
+  const commitDaily = useCallback(async () => {
+    await persistStats();
+    if (committed.current) return;
+    committed.current = true;
+    const correct = Object.values(learnVerdicts.current).filter((v) => v !== "wrong").length;
+    await logActivity({ type: "vocab", refId: topicId, count: correct });
+    markDone(`vocab:${topicId}`);
+  }, [persistStats, topicId, markDone]);
+
+  // ----- Bước ① Làm quen -----
+  const revealPreview = useCallback(() => {
+    setPRevealed(true);
+    if (previewCard) void playVocab(previewCard.audio, previewCard.chunk);
+  }, [previewCard]);
+
+  const nextPreview = useCallback(() => {
+    if (pIndex + 1 >= words.length) {
+      setPhase("learn");
+    } else {
+      setPIndex((i) => i + 1);
+      setPRevealed(false);
+    }
+  }, [pIndex, words.length]);
+
+  // ----- Bước ③ chuẩn bị -----
   const beginTranslate = useCallback(() => {
-    // Ưu tiên dịch lại các câu chứa từ vừa trả lời sai/gần đúng
+    void commitDaily(); // học nghĩa xong = coi như đã học từ vựng hôm nay
     const studied = Object.keys(learnVerdicts.current);
     const rank = (id: string) => {
       const v = learnVerdicts.current[id];
@@ -157,17 +165,53 @@ function StudySession() {
     setAnswer("");
     setResult(null);
     setPhase(chosen.length ? "translate" : "done");
-  }, []);
+  }, [commitDaily]);
 
-  const finish = useCallback(async () => {
-    setPhase("done");
-    await saveWordStats(statsRef.current);
-    if (!doneLogged.current) {
-      doneLogged.current = true;
-      await logActivity({ type: "vocab", refId: topicId, count: meaningCorrect });
-      markDone(`vocab:${topicId}`);
+  // ----- Kiểm tra (bước ② và ③) -----
+  const submit = useCallback(() => {
+    if (!currentCard || result !== null) return;
+    const v =
+      phase === "learn"
+        ? checkMeaning(answer, currentCard.meaningVi)
+        : checkTranslation(answer, currentCard.example);
+    setResult(v);
+    if (phase === "learn") {
+      void playVocab(currentCard.audio, currentCard.chunk);
+      learnVerdicts.current[currentCard.id] = v;
+      statsRef.current[currentCard.id] = applyResult(statsRef.current[currentCard.id], v !== "wrong", Date.now());
+      void persistStats(); // lưu ngay sau mỗi từ
+      setMeaningTotal((n) => n + 1);
+      if (v !== "wrong") setMeaningCorrect((n) => n + 1);
+    } else if (v !== "wrong") {
+      setTransCorrect((n) => n + 1);
     }
-  }, [topicId, meaningCorrect, markDone]);
+  }, [currentCard, result, phase, answer, persistStats]);
+
+  const override = useCallback(
+    (correct: boolean) => {
+      if (!currentCard || result === null) return;
+      const wasCorrect = result !== "wrong";
+      if (wasCorrect === correct) return;
+      setResult(correct ? "correct" : "wrong");
+      if (phase === "learn") {
+        statsRef.current[currentCard.id] = applyResult(
+          {
+            correct: (statsRef.current[currentCard.id]?.correct ?? 0) - (wasCorrect ? 1 : 0),
+            wrong: (statsRef.current[currentCard.id]?.wrong ?? 0) - (wasCorrect ? 0 : 1),
+            lastSeen: 0,
+          },
+          correct,
+          Date.now()
+        );
+        learnVerdicts.current[currentCard.id] = correct ? "correct" : "wrong";
+        void persistStats();
+        setMeaningCorrect((n) => n + (correct ? 1 : -1));
+      } else {
+        setTransCorrect((n) => n + (correct ? 1 : -1));
+      }
+    },
+    [currentCard, result, phase, persistStats]
+  );
 
   const nextLearn = useCallback(() => {
     const rest = learnQueue.slice(1);
@@ -184,11 +228,12 @@ function StudySession() {
     setAnswer("");
     setResult(null);
     if (tIndex + 1 >= translateWords.length) {
-      void finish();
+      void persistStats();
+      setPhase("done");
     } else {
       setTIndex((i) => i + 1);
     }
-  }, [tIndex, translateWords.length, finish]);
+  }, [tIndex, translateWords.length, persistStats]);
 
   if (!deck) {
     return (
@@ -202,6 +247,18 @@ function StudySession() {
   }
 
   if (!ready) return <main className="flex h-[70vh] items-center justify-center text-muted">Đang tải...</main>;
+
+  if (words.length === 0) {
+    return (
+      <main className="flex h-[70vh] flex-col items-center justify-center gap-3 text-center">
+        <span className="text-4xl">📭</span>
+        <p className="text-muted">Chủ đề này chưa có từ để học.</p>
+        <Link href="/vocab" className="rounded-full bg-primary px-6 py-2.5 font-semibold text-white">
+          Chọn chủ đề khác
+        </Link>
+      </main>
+    );
+  }
 
   if (phase === "done") {
     return (
@@ -226,28 +283,83 @@ function StudySession() {
     );
   }
 
-  if (!currentCard) return null;
+  // ---- Bước ① Làm quen ----
+  if (phase === "preview") {
+    if (!previewCard) return null;
+    const isLast = pIndex + 1 >= words.length;
+    return (
+      <main className="flex min-h-[80vh] flex-col">
+        <StudyTopBar
+          label={PHASE_LABEL.preview}
+          done={pIndex}
+          total={words.length}
+          onHelp={() => setShowHelp((v) => !v)}
+        />
+        {(!seenVocabHelp || showHelp) && (
+          <VocabHelp
+            onClose={() => {
+              setSeenVocabHelp(true);
+              setShowHelp(false);
+            }}
+          />
+        )}
+        <div className="flex flex-1 flex-col items-center justify-center rounded-2xl border border-border bg-card p-5 text-center">
+          <p className="text-sm text-muted">Từ mới — đọc và ghi nhớ:</p>
+          <div className="mt-3 flex items-center gap-2">
+            <p className="text-2xl font-bold leading-snug">{previewCard.chunk}</p>
+            <button
+              type="button"
+              onClick={() => void playVocab(previewCard.audio, previewCard.chunk)}
+              className="shrink-0 rounded-full bg-primary-soft px-3 py-1.5 text-sm text-primary"
+              aria-label="Nghe"
+            >
+              🔈
+            </button>
+          </div>
+          {pRevealed ? (
+            <div className="mt-4 w-full">
+              <p className="text-xl font-semibold">{previewCard.meaningVi}</p>
+              <div className="mt-3 rounded-xl bg-background p-3 text-left text-sm">
+                <p className="font-medium">📝 {previewCard.example}</p>
+                <p className="mt-0.5 text-muted">{previewCard.exampleVi}</p>
+              </div>
+            </div>
+          ) : (
+            <p className="mt-6 text-sm text-muted">Thử đoán nghĩa trong đầu, rồi bấm nút bên dưới để xem.</p>
+          )}
+        </div>
+        <div className="mt-4 pb-2">
+          {!pRevealed ? (
+            <button
+              type="button"
+              onClick={revealPreview}
+              className="w-full rounded-2xl bg-primary py-3.5 text-base font-bold text-white active:opacity-90"
+            >
+              Xem nghĩa & ví dụ
+            </button>
+          ) : (
+            <button
+              type="button"
+              onClick={nextPreview}
+              className="w-full rounded-2xl bg-accent py-3.5 text-base font-bold text-white active:opacity-90"
+            >
+              {isLast ? "Bắt đầu kiểm tra nghĩa →" : "Từ tiếp theo →"}
+            </button>
+          )}
+        </div>
+      </main>
+    );
+  }
 
+  // ---- Bước ② Học nghĩa / ③ Dịch câu ----
+  if (!currentCard) return null;
   const total = phase === "learn" ? meaningTotal + learnQueue.length : translateWords.length;
   const doneN = phase === "learn" ? meaningTotal : tIndex;
   const revealed = result !== null;
 
   return (
     <main className="flex min-h-[80vh] flex-col">
-      <div className="mb-3 flex items-center gap-3">
-        <Link href="/vocab" className="text-sm text-muted">✕</Link>
-        <div className="flex-1">
-          <div className="flex items-center justify-between text-xs font-semibold text-muted">
-            <span>{phase === "learn" ? "① Học nghĩa từ" : "② Dịch câu Việt → Anh"}</span>
-            <span>{doneN}/{total}</span>
-          </div>
-          <div className="mt-1 h-1.5 overflow-hidden rounded-full bg-border">
-            <div className="h-full rounded-full bg-primary transition-all" style={{ width: `${(doneN / Math.max(total, 1)) * 100}%` }} />
-          </div>
-        </div>
-        <button type="button" onClick={() => setShowHelp((v) => !v)} aria-label="Hướng dẫn">ℹ️</button>
-      </div>
-
+      <StudyTopBar label={PHASE_LABEL[phase]} done={doneN} total={total} onHelp={() => setShowHelp((v) => !v)} />
       {(!seenVocabHelp || showHelp) && (
         <VocabHelp
           onClose={() => {
@@ -325,7 +437,6 @@ function StudySession() {
                 </>
               )}
             </div>
-            {/* Tự chấm lại nếu hệ thống chấm chưa chuẩn */}
             <div className="mt-2 flex items-center justify-center gap-2 text-xs">
               <span className="text-muted">Hệ thống chấm chưa đúng?</span>
               {result === "wrong" ? (
@@ -377,6 +488,37 @@ function StudySession() {
         )}
       </div>
     </main>
+  );
+}
+
+function StudyTopBar({
+  label,
+  done,
+  total,
+  onHelp,
+}: {
+  label: string;
+  done: number;
+  total: number;
+  onHelp: () => void;
+}) {
+  return (
+    <div className="mb-3 flex items-center gap-3">
+      <Link href="/vocab" className="text-sm text-muted">✕</Link>
+      <div className="flex-1">
+        <div className="flex items-center justify-between text-xs font-semibold text-muted">
+          <span>{label}</span>
+          <span>{done}/{total}</span>
+        </div>
+        <div className="mt-1 h-1.5 overflow-hidden rounded-full bg-border">
+          <div
+            className="h-full rounded-full bg-primary transition-all"
+            style={{ width: `${(done / Math.max(total, 1)) * 100}%` }}
+          />
+        </div>
+      </div>
+      <button type="button" onClick={onHelp} aria-label="Hướng dẫn">ℹ️</button>
+    </div>
   );
 }
 

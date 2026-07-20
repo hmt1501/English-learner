@@ -43,6 +43,8 @@ for (const { file, data } of loadDir("decks")) {
   const deck = check(VocabDeckSchema, file, data);
   if (!deck) continue;
   if (!topicIds.has(deck.topic)) errors.push(`${file}: topic "${deck.topic}" không tồn tại`);
+  // App tra deck theo id nhưng chọn/hiển thị theo topic — bắt buộc trùng nhau
+  if (deck.id !== deck.topic) errors.push(`${file}: deck.id ("${deck.id}") phải trùng deck.topic ("${deck.topic}")`);
   for (const card of deck.cards) {
     if (allCardIds.has(card.id)) errors.push(`${file}: trùng card id "${card.id}"`);
     allCardIds.add(card.id);

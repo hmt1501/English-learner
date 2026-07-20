@@ -105,9 +105,13 @@ export async function exportBackup(): Promise<BackupData> {
 }
 
 export async function importBackup(data: BackupData): Promise<void> {
-  await saveWordStats(data.wordStats ?? {});
-  await set(KEY_ACTIVITY_LOG, data.activityLog ?? [], store);
-  if (data.progressStore && typeof localStorage !== "undefined") {
+  if (!data || typeof data !== "object") throw new Error("File sao lưu không hợp lệ");
+  const wordStats =
+    data.wordStats && typeof data.wordStats === "object" && !Array.isArray(data.wordStats) ? data.wordStats : {};
+  const activityLog = Array.isArray(data.activityLog) ? data.activityLog : [];
+  await saveWordStats(wordStats);
+  await set(KEY_ACTIVITY_LOG, activityLog, store);
+  if (typeof data.progressStore === "string" && typeof localStorage !== "undefined") {
     localStorage.setItem("tacs-progress", data.progressStore);
   }
 }

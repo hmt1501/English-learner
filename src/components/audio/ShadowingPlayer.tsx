@@ -16,6 +16,7 @@ export function ShadowingPlayer({ dialogue }: { dialogue: Dialogue }) {
   const [micError, setMicError] = useState(false);
   const [finished, setFinished] = useState(false);
   const recorderRef = useRef<Recorder | null>(null);
+  const urlRef = useRef<string | null>(null); // để dọn dẹp URL cuối cùng khi rời trang
   const markDone = useProgress((s) => s.markDone);
   const recordSupported = canRecord();
 
@@ -26,18 +27,22 @@ export function ShadowingPlayer({ dialogue }: { dialogue: Dialogue }) {
     return () => {
       stopAudio();
       recorderRef.current?.cancel();
-      if (recordingUrl) URL.revokeObjectURL(recordingUrl);
+      if (urlRef.current) URL.revokeObjectURL(urlRef.current);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  function setRecordingUrlTracked(url: string | null) {
+    if (urlRef.current) URL.revokeObjectURL(urlRef.current);
+    urlRef.current = url;
+    setRecordingUrl(url);
+  }
 
   async function toggleRecord() {
     if (recording) {
       const blob = await recorderRef.current!.stop();
       recorderRef.current = null;
       setRecording(false);
-      if (recordingUrl) URL.revokeObjectURL(recordingUrl);
-      setRecordingUrl(URL.createObjectURL(blob));
+      setRecordingUrlTracked(URL.createObjectURL(blob));
       return;
     }
     try {
@@ -63,8 +68,7 @@ export function ShadowingPlayer({ dialogue }: { dialogue: Dialogue }) {
   }
 
   function next() {
-    if (recordingUrl) URL.revokeObjectURL(recordingUrl);
-    setRecordingUrl(null);
+    setRecordingUrlTracked(null);
     if (isLast) {
       void (async () => {
         setFinished(true);

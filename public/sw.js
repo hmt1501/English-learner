@@ -2,7 +2,7 @@
 // - Trang: network-first, rơi về cache khi mất mạng
 // - Audio + asset build (_next/static): cache-first
 // Tự nhận base path từ scope (chạy được cả ở "/" lẫn "/English-learner/").
-const VERSION = "v1";
+const VERSION = "v2";
 const PAGE_CACHE = `tacs-pages-${VERSION}`;
 const ASSET_CACHE = "tacs-assets";
 const AUDIO_CACHE = "tacs-audio";
@@ -10,7 +10,7 @@ const KEEP = [PAGE_CACHE, ASSET_CACHE, AUDIO_CACHE];
 
 const BASE = new URL(self.registration.scope).pathname; // "/" hoặc "/English-learner/"
 
-const PRECACHE_PAGES = ["", "vocab/", "vocab/review/", "listening/", "chat/", "settings/", "manifest.json"].map(
+const PRECACHE_PAGES = ["", "vocab/", "vocab/study/", "listening/", "chat/", "settings/", "manifest.json"].map(
   (p) => BASE + p
 );
 
@@ -18,7 +18,8 @@ self.addEventListener("install", (event) => {
   event.waitUntil(
     caches
       .open(PAGE_CACHE)
-      .then((cache) => cache.addAll(PRECACHE_PAGES))
+      // Precache "best-effort": một trang lỗi không được làm hỏng toàn bộ cài đặt
+      .then((cache) => Promise.allSettled(PRECACHE_PAGES.map((url) => cache.add(url))))
       .then(() => self.skipWaiting())
   );
 });

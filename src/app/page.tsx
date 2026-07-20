@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { decks, dialogues, scenarios, getDialogue, getScenario, getTopic } from "@/lib/content";
-import { getWordStats, getLastDoneMap, isMastered } from "@/lib/storage";
+import { getWordStats, getLastDoneMap, getActivityLog, todayStr, isMastered } from "@/lib/storage";
 import { composeSession, MODE_LABELS, type PlanItem, type SessionMode } from "@/lib/session";
 import { useProgress } from "@/stores/progress";
 import { useMounted } from "@/lib/useMounted";
@@ -46,7 +46,8 @@ export default function HomePage() {
   const mounted = useMounted();
   const [plan, setPlan] = useState<PlanItem[] | null>(null);
   const [remainingWords, setRemainingWords] = useState<Record<string, number>>({});
-  const { name, mode, streak, doneToday, setMode, rollDay, recordStreak, lastStreakDate, today } = useProgress();
+  const { name, mode, streak, doneToday, setMode, setTodayPlan, rollDay, recordStreak, lastStreakDate, today } =
+    useProgress();
 
   useEffect(() => {
     rollDay();
@@ -63,19 +64,49 @@ export default function HomePage() {
         remaining[deck.id] = deck.cards.filter((c) => !isMastered(stats[c.id])).length;
       }
       setRemainingWords(remaining);
-      setPlan(
-        composeSession({
-          mode,
-          topicIds: decks.map((d) => d.topic),
-          topicLastStudied,
-          dialogueIds: dialogues.map((d) => d.id),
-          scenarioIds: scenarios.map((s) => s.id),
-          lastDone,
-          dayIndex: Math.floor(Date.now() / 86_400_000),
-        })
-      );
+      // Ngày theo lịch ĐỊA PHƯƠNG, khớp với streak/doneToday (tránh lệch múi giờ)
+      const localDayIndex = Math.floor((Date.now() - new Date().getTimezoneOffset() * 60_000) / 86_400_000);
+      const items = composeSession({
+        mode,
+        topicIds: decks.map((d) => d.topic),
+        topicLastStudied,
+        dialogueIds: dialogues.map((d) => d.id),
+        scenarioIds: scenarios.map((s) => s.id),
+        lastDone,
+        dayIndex: localDayIndex,
+      });
+
+      // Ghim các mục ĐÃ hoàn thành hôm nay vào đúng bài đó, để mục hiện ✅ và kế hoạch
+      // không "chạy" sang bài mới sau mỗi lần hoàn thành (giữ chuỗi ngày lên được).
+      const dayLog = await getActivityLog();
+      const today = todayStr();
+      const dialogueIdSet = dialogues.map((d) => d.id);
+      const scenarioIdSet = scenarios.map((s) => s.id);
+      const doneTodayRef = (type: "vocab" | "listening" | "shadowing" | "chat", validIds: string[]) =>
+        [...dayLog].reverse().find((e) => e.type === type && e.date === today && !!e.refId && validIds.includes(e.refId))
+          ?.refId;
+
+      for (let i = 0; i < items.length; i++) {
+        const it = items[i];
+        if (it.type === "vocab") {
+          const r = doneTodayRef("vocab", decks.map((d) => d.topic));
+          if (r) items[i] = { type: "vocab", topicId: r };
+        } else if (it.type === "listening") {
+          const r = doneTodayRef("listening", dialogueIdSet);
+          if (r) items[i] = { type: "listening", id: r };
+        } else if (it.type === "shadowing") {
+          const r = doneTodayRef("shadowing", dialogueIdSet);
+          if (r) items[i] = { type: "shadowing", id: r };
+        } else if (it.type === "chat") {
+          const r = doneTodayRef("chat", scenarioIdSet);
+          if (r) items[i] = { type: "chat", id: r };
+        }
+      }
+
+      setPlan(items);
+      setTodayPlan(items.map(planKey));
     })();
-  }, [mounted, mode, doneToday]);
+  }, [mounted, mode, doneToday, setTodayPlan]);
 
   const allDone = useMemo(
     () => plan !== null && plan.length > 0 && plan.every((item) => doneToday.includes(planKey(item))),
@@ -86,7 +117,7 @@ export default function HomePage() {
     if (allDone) recordStreak();
   }, [allDone, recordStreak]);
 
-  const streakDoneToday = lastStreakDate === today;
+  const streakDoneToday = mounted && lastStreakDate === today;
 
   return (
     <main>

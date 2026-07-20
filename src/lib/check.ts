@@ -50,11 +50,8 @@ export function checkMeaning(user: string, expected: string): Verdict {
   const ne = normalize(expected);
   if (!nu) return "wrong";
   if (nu === ne || stripAccents(nu) === stripAccents(ne)) return "correct";
-  // Người học viết một phần đúng của nghĩa (hoặc ngược lại)
-  const su = stripAccents(nu);
-  const se = stripAccents(ne);
-  if (se.includes(su) || su.includes(se)) return "correct";
-  // Nghĩa chấm rộng tay: nắm được ý cốt lõi là chấp nhận (vẫn hiện đáp án đầy đủ)
+  // Nghĩa chấm rộng tay theo tỉ lệ từ cốt lõi trùng khớp (theo từ, không theo chuỗi con
+  // — tránh chấp nhận nhầm khi nghĩa quá ngắn). Vẫn luôn hiện đáp án đầy đủ.
   const cov = coverage(user, expected, VI_STOP, true);
   return cov >= 0.5 ? "correct" : cov >= 0.3 ? "close" : "wrong";
 }

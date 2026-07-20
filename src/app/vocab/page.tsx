@@ -19,7 +19,7 @@ export default function VocabPage() {
     (async () => {
       const stats = await getWordStats();
       const lastStudied = await getLastDoneMap(["vocab"]);
-      const dayIndex = Math.floor(Date.now() / 86_400_000);
+      const dayIndex = Math.floor((Date.now() - new Date().getTimezoneOffset() * 60_000) / 86_400_000);
       const todayTopic = pickTodayTopic(decks.map((d) => d.topic), lastStudied, dayIndex);
       setInfo({ stats, todayTopic });
     })();

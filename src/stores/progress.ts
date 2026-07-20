@@ -20,6 +20,9 @@ type ProgressState = {
   today: string;
   /** Khóa các mục đã xong hôm nay, ví dụ "vocab:meetings", "listening:meetings-01" */
   doneToday: string[];
+  /** Khóa của TẤT CẢ mục trong phiên hôm nay (do trang Hôm nay ghi lại) — dùng để
+   * biết khi nào đã xong hết và cộng chuỗi ngày, dù đang ở màn hình khác */
+  todayPlanKeys: string[];
 
   /** Đã xem hướng dẫn cách học từ vựng chưa */
   seenVocabHelp: boolean;
@@ -31,6 +34,8 @@ type ProgressState = {
   setName: (name: string) => void;
   setMode: (mode: SessionMode) => void;
   setWordsPerSession: (n: number) => void;
+  /** Trang Hôm nay ghi lại danh sách khóa mục của phiên hôm nay */
+  setTodayPlan: (keys: string[]) => void;
   /** Đánh dấu 1 mục trong phiên hôm nay đã xong */
   markDone: (key: string) => void;
   /** Ghi nhận hôm nay đã học đủ — cộng chuỗi ngày (idempotent theo ngày) */
@@ -56,6 +61,7 @@ export const useProgress = create<ProgressState>()(
       lastStreakDate: null,
       today: todayStr(),
       doneToday: [],
+      todayPlanKeys: [],
       seenVocabHelp: false,
       geminiKey: "",
 
@@ -65,10 +71,23 @@ export const useProgress = create<ProgressState>()(
       setMode: (mode) => set({ mode }),
       setWordsPerSession: (wordsPerSession) => set({ wordsPerSession }),
 
+      setTodayPlan: (keys) => {
+        get().rollDay();
+        set({ todayPlanKeys: keys });
+        // Nếu (vì lý do nào đó) đã xong hết từ trước → cộng chuỗi luôn
+        const { doneToday } = get();
+        if (keys.length > 0 && keys.every((k) => doneToday.includes(k))) get().recordStreak();
+      },
+
       markDone: (key) => {
         get().rollDay();
-        const { doneToday } = get();
-        if (!doneToday.includes(key)) set({ doneToday: [...doneToday, key] });
+        const { doneToday, todayPlanKeys } = get();
+        const nextDone = doneToday.includes(key) ? doneToday : [...doneToday, key];
+        set({ doneToday: nextDone });
+        // Xong mục cuối cùng của phiên → cộng chuỗi ngay, không cần quay lại tab Hôm nay
+        if (todayPlanKeys.length > 0 && todayPlanKeys.every((k) => nextDone.includes(k))) {
+          get().recordStreak();
+        }
       },
 
       recordStreak: () => {
@@ -81,7 +100,7 @@ export const useProgress = create<ProgressState>()(
 
       rollDay: () => {
         const today = todayStr();
-        if (get().today !== today) set({ today, doneToday: [] });
+        if (get().today !== today) set({ today, doneToday: [], todayPlanKeys: [] });
       },
     }),
     { name: "tacs-progress" }
